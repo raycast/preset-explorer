@@ -19,7 +19,17 @@ button {
     sans-serif;
   color: #fff;
   -webkit-text-size-adjust: 100%;
-  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-moz-selection {
+  color: #9770e9;
+  background: rgba(44, 29, 75, 0.5);
+}
+
+::selection {
+  color: #9770e9;
+  background: rgba(44, 29, 75, 0.5);
 }
 
 #__next {
@@ -70,10 +80,4 @@ kbd {
     background-color: hsla(0, 0%, 100%, 0.3);
     color: hsla(0, 0%, 100%, 0.9);
   }
-}
-
-.selection-area {
-  background: rgba(86, 194, 255, 0.15);
-  border: 1px solid #56c2ff;
-  border-radius: 2px;
 }

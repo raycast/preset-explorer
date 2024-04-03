@@ -1,348 +1,155 @@
-import React from "react";
-import Link from "next/link";
-import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
-import { nanoid } from "nanoid";
+import React from "react";
+import copy from "copy-to-clipboard";
+
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "../components/DropdownMenu";
-import { Toast, ToastTitle } from "../components/Toast";
-import { ScrollArea } from "../components/ScrollArea";
-import { Button } from "../components/Button";
-import { ButtonGroup } from "../components/ButtonGroup";
-import { isTouchDevice } from "../utils/isTouchDevice";
-import { extractPresets } from "../utils/extractPresets";
-import styles from "../styles/Home.module.css";
-import buttonStyles from "../components/Button.module.css";
-import { Preset } from "../data/presets";
-import CreativityIcon from "../components/CreativityIcon";
-import {
-  ChevronDownIcon,
+  CheckIcon,
   CopyClipboardIcon,
-  DownloadIcon,
-  PlusCircleIcon,
-  StarsIcon,
+  Globe01Icon,
   Icons,
+  XMarkCircleIcon,
 } from "@raycast/icons";
-import { addToRaycast, copyData, downloadData } from "../utils/actions";
-import WebSearchIcon from "../components/WebSearchIcon";
 
-export default function Home() {
+import {
+  PresetComponent,
+  PresetWithIconComponent,
+  aiModel,
+} from "../components/Preset";
+import { creativity as creativityString } from "../components/Preset";
+import CreativityIcon from "../components/CreativityIcon";
+import ModelIcon from "../components/ModelIcon";
+
+import { allPresets, Preset } from "../data/presets";
+import styles from "../styles/Shared.module.css";
+
+export default function PresetPage() {
+  const [showCopied, setShowCopied] = React.useState(false);
+  const [relatedPresets, setRelatedPresets] = React.useState<
+    PresetWithIconComponent[]
+  >([]);
+
   const router = useRouter();
-
-  const [copied, setCopied] = React.useState(false);
-
-  const [actionsOpen, setActionsOpen] = React.useState(false);
-  const sharedPresetsInURL = React.useMemo(
-    () => parseURLPreset(router.query.presets),
+  const preset: Preset = React.useMemo(
+    () => parseURLPreset(router.query.preset as string),
     [router.query]
   );
-  const [selectedPresets, setSelectedPresets] = React.useState([
-    ...sharedPresetsInURL,
-  ]);
-  const isTouch = React.useMemo(
-    () => (typeof window !== "undefined" ? isTouchDevice() : false),
-    []
-  );
 
   React.useEffect(() => {
-    // everytime the sharedPresetsInURL changes, we want to update the selectedPresets
-    // so that we start with the shared presets selected
-    setSelectedPresets([...sharedPresetsInURL]);
-  }, [sharedPresetsInURL]);
-
-  const categories = [
-    {
-      name: `${sharedPresetsInURL.length} ${
-        sharedPresetsInURL.length > 1 ? "presets" : "preset"
-      } shared with you`,
-      isTemplate: true,
-      isShared: true,
-      presets: sharedPresetsInURL,
-      slug: "/shared",
-      icon: StarsIcon,
-    },
-  ];
-
-  const onStart = ({ event, selection }: SelectionEvent) => {
-    if (!event?.ctrlKey && !event?.metaKey) {
-      selection.clearSelection();
-      setSelectedPresets([]);
-    }
-  };
-
-  const onMove = ({
-    store: {
-      changed: { added, removed },
-    },
-  }: SelectionEvent) => {
-    const addedPresets = extractPresets(added, categories);
-    const removedPresets = extractPresets(removed, categories);
-
-    setSelectedPresets((prevPresets) => {
-      const presets = [...prevPresets];
-
-      addedPresets.forEach((preset) => {
-        if (!preset) {
-          return;
-        }
-        if (presets.find((p) => p.id === preset.id)) {
-          return;
-        }
-        presets.push(preset);
-      });
-
-      removedPresets.forEach((preset) => {
-        return presets.filter((s) => s?.id !== preset?.id);
-      });
-
-      return presets;
-    });
-  };
-
-  const handleDownload = React.useCallback(() => {
-    downloadData(selectedPresets);
-  }, [selectedPresets]);
-
-  const handleCopyData = React.useCallback(() => {
-    copyData(selectedPresets);
-    setCopied(true);
-  }, [selectedPresets]);
-
-  const handleAddToRaycast = React.useCallback(
-    () => addToRaycast(router, selectedPresets),
-    [router, selectedPresets]
-  );
-
-  React.useEffect(() => {
-    const down = (event: KeyboardEvent) => {
-      const { key, keyCode, metaKey, altKey } = event;
-
-      if (key === "k" && metaKey) {
-        if (selectedPresets.length === 0) return;
-        setActionsOpen((prevOpen) => {
-          return !prevOpen;
-        });
-      }
-
-      if (key === "d" && metaKey) {
-        if (selectedPresets.length === 0) return;
-        event.preventDefault();
-        handleDownload();
-      }
-
-      if (key === "Enter" && metaKey) {
-        if (selectedPresets.length === 0) return;
-        event.preventDefault();
-        handleAddToRaycast();
-      }
-
-      // key === "c" doesn't work when using alt key, so we use keCode instead (67)
-      if (keyCode === 67 && metaKey && altKey) {
-        if (selectedPresets.length === 0) return;
-        event.preventDefault();
-        handleCopyData();
-        setActionsOpen(false);
-      }
-
-      if (key === "a" && metaKey) {
-        event.preventDefault();
-        setSelectedPresets([...sharedPresetsInURL]);
-      }
-    };
-
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, [
-    sharedPresetsInURL,
-    setActionsOpen,
-    selectedPresets,
-    handleCopyData,
-    handleDownload,
-    handleAddToRaycast,
-  ]);
-
-  React.useEffect(() => {
-    if (copied) {
+    if (showCopied) {
       setTimeout(() => {
-        setCopied(false);
+        setShowCopied(false);
       }, 2000);
     }
-  }, [copied]);
+  }, [showCopied]);
 
-  if (sharedPresetsInURL.length === 0) {
-    return;
+  React.useEffect(() => {
+    if (preset) {
+      setRelatedPresets(
+        allPresets
+          .filter((p) => p.id !== preset.id)
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 2)
+      );
+    }
+  }, [preset]);
+
+  if (!preset) {
+    return null;
   }
 
-  console.log(categories);
+  const {
+    title,
+    description,
+    instructions,
+    creativity,
+    icon,
+    model,
+    web_search,
+  } = preset;
+
+  const IconComponent = Icons[icon] ? Icons[icon] : null;
+
+  const handleCopyInstructions = () => {
+    copy(instructions);
+    setShowCopied(true);
+  };
 
   return (
-    <div>
-      <header className={styles.nav}>
-        <Link
-          href="/"
-          aria-label="Home"
-          style={{ display: "flex", alignItems: "center", gap: 12 }}
-        >
-          <span
-            className={buttonStyles.button}
-            style={{ fontWeight: 500, fontSize: 13 }}
-            data-variant="gray"
-          >
-            ← See all Presets
-          </span>
-        </Link>
-        <div className={styles.navControls}>
-          <ButtonGroup>
-            <Button
-              variant="red"
-              disabled={selectedPresets.length === 0}
-              onClick={() => handleAddToRaycast()}
-            >
-              <PlusCircleIcon /> Add to Raycast
-            </Button>
-
-            <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="red"
-                  disabled={selectedPresets.length === 0}
-                  aria-label="Export options"
-                >
-                  <ChevronDownIcon />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem
-                  disabled={selectedPresets.length === 0}
-                  onSelect={() => handleDownload()}
-                >
-                  <DownloadIcon /> Download JSON
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>D</kbd>
-                  </span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  disabled={selectedPresets.length === 0}
-                  onSelect={() => handleCopyData()}
-                >
-                  <CopyClipboardIcon /> Copy JSON{" "}
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>⌥</kbd>
-                    <kbd>C</kbd>
-                  </span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </ButtonGroup>
-        </div>
-      </header>
-
-      <Toast open={copied} onOpenChange={setCopied}>
+    <>
+      {/* <Toast open={showToast} onOpenChange={setShowToast}>
         <ToastTitle className={styles.toastTitle}>
-          <CopyClipboardIcon /> Copied to clipboard
+          <CopyClipboardIcon /> {toastMessage}
         </ToastTitle>
-      </Toast>
-
-      <div>
-        <div className={styles.container}>
-          {isTouch !== null && (
-            <SelectionArea
-              className="container"
-              onStart={onStart}
-              onMove={onMove}
-              selectables=".selectable"
-              features={{
-                // Disable support for touch devices
-                touch: isTouch ? false : true,
-                range: true,
-                singleTap: {
-                  allow: true,
-                  intersect: "native",
-                },
-              }}
-            >
-              {categories.map((presetGroup) => {
-                return (
-                  <div
-                    key={presetGroup.name}
-                    data-section-slug={presetGroup.slug}
-                    style={{ outline: "none" }}
-                  >
-                    <h2 className={styles.subtitle}>
-                      <presetGroup.icon /> {presetGroup.name}
-                    </h2>
-                    <div className={styles.presets}>
-                      {presetGroup.presets.map((preset, index) => {
-                        const Icon =
-                          preset.icon in Icons ? Icons[preset.icon] : StarsIcon;
-
-                        return (
-                          <div
-                            className={`${styles.item} selectable`}
-                            key={preset.id}
-                            data-selected={selectedPresets.some(
-                              (selectedPreset) =>
-                                selectedPreset?.id === preset.id
-                            )}
-                            data-key={`${presetGroup.slug}-${index}`}
-                          >
-                            <div className={styles.presetTemplate}>
-                              <ScrollArea>
-                                <pre
-                                  className={styles.template}
-                                  dangerouslySetInnerHTML={{
-                                    __html: preset.instructions.replace(
-                                      /\{[^}]+\}/g,
-                                      `<span class="${styles.placeholder}">$&</span>`
-                                    ),
-                                  }}
-                                ></pre>
-                              </ScrollArea>
-                            </div>
-                            <div className={styles.preset}>
-                              <span className={styles.name}>
-                                <Icon />
-                                {preset.title}
-                              </span>
-                              <WebSearchIcon webSearch={preset.web_search} />
-                              <CreativityIcon creativity={preset.creativity} />
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </SelectionArea>
+      </Toast> */}
+      <div className={styles.container}>
+        <header className={styles.header}>
+          {IconComponent && (
+            <div className={styles.icon}>
+              <IconComponent />
+            </div>
           )}
+          <div className={styles.content}>
+            <h1 className={styles.title}>{title}</h1>
+            <h2 className={styles.description}>{description}</h2>
+          </div>
+        </header>
+        <div className={styles.body}>
+          <div className={styles.instructions}>
+            <div className={styles.instructionsInner}>
+              <div className={styles.instructionsHeader}>
+                <h3 className={styles.compactTitle}>Instructions</h3>
+                <button
+                  className={styles.copyButton}
+                  onClick={handleCopyInstructions}
+                  data-copied={showCopied}
+                >
+                  <CheckIcon data-icon="check" />
+                  <CopyClipboardIcon data-icon="copy" />
+                </button>
+              </div>
+              <pre className={styles.pre}>{instructions}</pre>
+            </div>
+          </div>
+          <div className={styles.meta}>
+            <div className={styles.metaItem}>
+              <h3 className={styles.compactTitle}>Model</h3>
+              <div className={styles.metaContent}>
+                <ModelIcon model={model} />
+                {model ? aiModel[model][1] : "Unknown"}
+              </div>
+            </div>
+            <div className={styles.metaItem}>
+              <h3 className={styles.compactTitle}>Creativity</h3>
+              <div className={styles.metaContent}>
+                <CreativityIcon creativity={creativity} />
+                {creativityString[creativity][0]}
+              </div>
+            </div>
+            <div className={styles.metaItem}>
+              <h3 className={styles.compactTitle}>Automatic Web Search</h3>
+              <div className={styles.metaContent}>
+                {web_search ? <Globe01Icon /> : <XMarkCircleIcon />}
+                {web_search ? "Enabled" : "Disabled"}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p className={styles.subtitle}>Explore more presets</p>
+          <div className={styles.grid}>
+            {relatedPresets.map((p) => (
+              <PresetComponent key={p.id} preset={p} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-function parseURLPreset(presetQueryString?: string | string[]): Preset[] {
+export function parseURLPreset(presetQueryString?: string) {
   if (!presetQueryString) {
-    return [];
+    return null;
   }
-  let presets;
-  if (Array.isArray(presetQueryString)) {
-    presets = presetQueryString;
-  } else {
-    presets = [presetQueryString];
-  }
-  return presets.map((preset) => ({
-    ...JSON.parse(preset),
-    id: nanoid(),
-    isShared: true,
-  }));
+  return JSON.parse(presetQueryString);
 }

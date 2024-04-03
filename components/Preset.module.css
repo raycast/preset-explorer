@@ -1,0 +1,135 @@
+.item {
+  padding: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  position: relative;
+  transition: all 150ms;
+  min-width: 0;
+  color: #ffffff60;
+  overflow: hidden;
+
+  &:hover {
+    background-color: rgba(44, 29, 75, 0.2);
+    box-shadow: inset 0 0 0 1px #2c1d4b;
+    color: #fff;
+
+    .icon {
+      border-color: #6949ae;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px #9261f9;
+    color: #fff;
+
+    .icon {
+      border-color: #6949ae;
+    }
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    150.08% 117.14% at 31.25% 9.37%,
+    #171717 0%,
+    #000 100%
+  );
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.header {
+  gap: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.icons {
+  display: flex;
+  gap: 8px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  padding-top: 6px;
+}
+
+.presetAuthor {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+
+  a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 150ms ease;
+
+    &:hover {
+      color: #ff6363;
+    }
+  }
+}
+
+.meta {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.metaItem {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  font-weight: 500;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.metaDivider {
+  width: 1px;
+  height: 9px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.presetDescription {
+  max-height: 320px;
+  width: 100%;
+  flex: 1;
+  font-size: 13px;
+  line-height: 180%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

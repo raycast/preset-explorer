@@ -269,14 +269,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                       presets to <a href="https://raycast.com">Raycast</a>.
                     </DialogDescription>
                     <p className={styles.dialogDescription}>
-                      Select the presets by clicking on them. To select
-                      multiple, hold <kbd>⌘</kbd> or select them with your
-                      mouse.
-                    </p>
-                    <p className={styles.dialogDescription}>
-                      Then, click the “Add to Raycast” button to import these AI
-                      presets. You can also download the presets as a JSON file,
-                      or copy the URL to share with others.
+                      Open a preset and click the “Add to Raycast” button to
+                      import the preset directly into Raycast. You can also
+                      download the preset as a JSON file, or copy the URL to
+                      share with others.
                     </p>
                   </div>
                   {!isTouch && (

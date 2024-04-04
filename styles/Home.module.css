@@ -16,7 +16,6 @@
   top: 60px;
   left: 0;
   bottom: 0;
-  height: calc(100vh - 50px);
   padding: 24px;
   display: none;
 
@@ -28,7 +27,6 @@
 .sidebarInner {
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  height: 100%;
   border-radius: 12px;
 
   & [data-radix-scroll-area-viewport] > div {
@@ -37,10 +35,9 @@
 }
 
 .sidebarContent {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 16px;
   padding: 16px;
 }
 
@@ -54,8 +51,10 @@
   justify-content: space-between;
 }
 
-.sidebarNav {
-  margin-bottom: 32px;
+.sidebarNavDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .sidebarNavItem {
@@ -86,6 +85,27 @@
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
     transition: box-shadow 100ms;
   }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+
+    &:hover {
+      background-color: transparent;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
 }
 
 .badge {

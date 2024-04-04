@@ -66,3 +66,12 @@
     transform: translateY(100%);
   }
 }
+
+.title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -35,5 +35,18 @@ export const ToastViewport = React.forwardRef<
 });
 ToastViewport.displayName = "ToastViewport";
 
+export const ToastTitle = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitive.Title>,
+  React.ComponentProps<typeof ToastPrimitive.Title>
+>((props, forwardedRef) => {
+  return (
+    <ToastPrimitive.Title
+      {...props}
+      className={styles.title}
+      ref={forwardedRef}
+    />
+  );
+});
+ToastTitle.displayName = "ToastTitle";
+
 export const ToastProvider = ToastPrimitive.Provider;
-export const ToastTitle = ToastPrimitive.Title;

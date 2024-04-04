@@ -71,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isOnSharedPage = router.pathname.includes("/shared");
 
   const preset: Preset = React.useMemo(
-    () => parseURLPreset(router.query.preset as string),
+    () => parseURLPreset(router?.query.preset as string),
     [router.query]
   );
 
@@ -158,12 +158,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         event.preventDefault();
         handleCopyUrl();
         setActionsOpen(false);
-      }
-
-      if (key === "," && metaKey && shiftKey) {
-        event.preventDefault();
-        setActionsOpen(false);
-        setAboutOpen(false);
       }
 
       if (key === "/" && metaKey) {
@@ -294,14 +288,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                           </span>
                         </li>
                         <li>
-                          Configure Hotkeys
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>⇧</kbd>
-                            <kbd>,</kbd>
-                          </span>
-                        </li>
-                        <li>
                           Download JSON
                           <span className={styles.hotkeys}>
                             <kbd>⌘</kbd>
@@ -421,9 +407,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component
           {...pageProps}
           onTouchReady={() => setEnableViewObserver(true)}
+          showToast={showToast}
+          setShowToast={setShowToast}
+          setToastMessage={setToastMessage}
+          toastMessage={toastMessage}
         />
         <Toast open={showToast} onOpenChange={setShowToast}>
-          <ToastTitle className={styles.toastTitle}>
+          <ToastTitle>
             <CopyClipboardIcon /> {toastMessage}
           </ToastTitle>
         </Toast>

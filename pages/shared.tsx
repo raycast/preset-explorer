@@ -21,6 +21,7 @@ import ModelIcon from "../components/ModelIcon";
 
 import { allPresets, Preset } from "../data/presets";
 import styles from "../styles/Shared.module.css";
+import Head from "next/head";
 
 export default function PresetPage() {
   const [showCopied, setShowCopied] = React.useState(false);
@@ -76,11 +77,10 @@ export default function PresetPage() {
 
   return (
     <>
-      {/* <Toast open={showToast} onOpenChange={setShowToast}>
-        <ToastTitle className={styles.toastTitle}>
-          <CopyClipboardIcon /> {toastMessage}
-        </ToastTitle>
-      </Toast> */}
+      <Head>
+        <title>{title} - Raycast Preset</title>
+        <meta name="description" content={description} />
+      </Head>
       <div className={styles.container}>
         <header className={styles.header}>
           {IconComponent && (

@@ -8,7 +8,7 @@ export type Preset = {
   instructions: string;
   icon: IconName;
   creativity: "none" | "low" | "medium" | "high" | "maximum";
-  model?:
+  model:
     | "openai_davinci_003"
     | "openai_gpt35_turbo"
     | "openai_gpt4"

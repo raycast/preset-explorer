@@ -22,6 +22,7 @@ import copy from "copy-to-clipboard";
 import { useRouter } from "next/router";
 import React from "react";
 import { Toast, ToastTitle } from "./Toast";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 
 export const aiModel = {
   openai_davinci_003: ["Davinci", "Davinci-3"],
@@ -143,13 +144,15 @@ export function PresetComponent({ preset }: PresetProps) {
               </div>
               <div className={styles.meta}>
                 {preset.model ? (
-                  <span
-                    className={styles.metaItem}
-                    title={aiModel[preset.model][1]}
-                  >
-                    <ModelIcon model={preset.model} />
-                    {aiModel[preset.model][0]}
-                  </span>
+                  <Tooltip delayDuration={700}>
+                    <TooltipTrigger>
+                      <span className={styles.metaItem}>
+                        <ModelIcon model={preset.model} />
+                        {aiModel[preset.model][0]}
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>{aiModel[preset.model][1]}</TooltipContent>
+                  </Tooltip>
                 ) : null}
                 {preset.creativity ? (
                   <>
@@ -163,10 +166,17 @@ export function PresetComponent({ preset }: PresetProps) {
                 {preset.web_search ? (
                   <>
                     <span className={styles.metaDivider} />
-                    <span className={styles.metaItem}>
-                      <Globe01Icon />
-                      Web Search
-                    </span>
+                    <Tooltip delayDuration={700}>
+                      <TooltipTrigger>
+                        <span className={styles.metaItem}>
+                          <Globe01Icon />
+                          Web Search
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        Searches the web if context is missing
+                      </TooltipContent>
+                    </Tooltip>
                   </>
                 ) : null}
               </div>

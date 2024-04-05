@@ -22,6 +22,8 @@ import ModelIcon from "../components/ModelIcon";
 import { allPresets, Preset } from "../data/presets";
 import styles from "../styles/Shared.module.css";
 import Head from "next/head";
+import { proModels } from "./[[...slug]]";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../components/Tooltip";
 
 export default function PresetPage() {
   const [showCopied, setShowCopied] = React.useState(false);
@@ -116,6 +118,18 @@ export default function PresetPage() {
               <div className={styles.metaContent}>
                 <ModelIcon model={model} />
                 {model ? aiModel[model][1] : "Unknown"}
+                {!proModels.includes(model) && (
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <span className={styles.badge}>
+                        <span>Advanced AI</span>
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Requires Advanced AI add-on to Raycast Pro
+                    </TooltipContent>
+                  </Tooltip>
+                )}
               </div>
             </div>
             <div className={styles.metaItem}>
@@ -134,6 +148,7 @@ export default function PresetPage() {
             </div>
           </div>
         </div>
+        <div className={styles.separator}></div>
         <div>
           <p className={styles.subtitle}>Explore more presets</p>
           <div className={styles.grid}>

@@ -53,6 +53,7 @@ import {
 } from "../utils/actions";
 import copy from "copy-to-clipboard";
 import { isTouchDevice } from "../utils/isTouchDevice";
+import { TooltipProvider } from "../components/Tooltip";
 
 const inter = Inter({ subsets: ["latin"] });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
@@ -217,208 +218,214 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="Easily browse, share, and add presets to Raycast."
         />
       </Head>
-      <ToastProvider swipeDirection="down">
-        <style jsx global>{`
-          :root {
-            --font-inter: ${inter.style.fontFamily};
-            --font-jetbrains: ${jetbrainsMono.style.fontFamily};
-          }
-        `}</style>
-        <header className={styles.nav}>
-          <div
-            className={clsx(
-              styles.logoContainer,
-              isOnSharedPage && styles.isOffset
-            )}
-          >
-            <Link
-              href="/"
-              aria-label="Home"
+      <TooltipProvider delayDuration={0}>
+        <ToastProvider swipeDirection="down">
+          <style jsx global>{`
+            :root {
+              --font-inter: ${inter.style.fontFamily};
+              --font-jetbrains: ${jetbrainsMono.style.fontFamily};
+            }
+          `}</style>
+          <header className={styles.nav}>
+            <div
               className={clsx(
-                styles.backButton,
-                isOnSharedPage && styles.isVisible
+                styles.logoContainer,
+                isOnSharedPage && styles.isOffset
               )}
-              aria-disabled={!isOnSharedPage}
-              tabIndex={isOnSharedPage ? 0 : -1}
             >
-              <ChevronLeftIcon />
-            </Link>
-            <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
-              <DialogTrigger asChild>
-                <button className={styles.logo}>
-                  <span className={styles.logoIcon}>
-                    <RaycastLogoNegIcon />
-                  </span>
-                  <h1>Preset Explorer</h1>
-                </button>
-              </DialogTrigger>
-              <DialogContent className={styles.about} showCloseButton={true}>
-                <div className={styles.aboutTopContent}>
-                  <div>
-                    <DialogTitle className={styles.dialogTitle}>
-                      About
-                    </DialogTitle>
-                    <DialogDescription className={styles.dialogDescription}>
-                      Preset Explorer is a tool to easily browse, share, and add
-                      presets to <a href="https://raycast.com">Raycast</a>.
-                    </DialogDescription>
-                    <p className={styles.dialogDescription}>
-                      Open a preset and click the “Add to Raycast” button to
-                      import the preset directly into Raycast. You can also
-                      download the preset as a JSON file, or copy the URL to
-                      share with others.
-                    </p>
-                  </div>
-                  {!isTouch && (
-                    <div>
-                      <h4 className={styles.dialogTitle}>Shortcuts</h4>
-                      <ul className={styles.shortcuts}>
-                        <li>
-                          Add to Raycast
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>⏎</kbd>
-                          </span>
-                        </li>
-                        <li>
-                          Toggle Export Menu
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>K</kbd>
-                          </span>
-                        </li>
-                        <li>
-                          Download JSON
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>D</kbd>
-                          </span>
-                        </li>
-                        <li>
-                          Copy JSON
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>⌥</kbd>
-                            <kbd>C</kbd>
-                          </span>
-                        </li>
-                        <li>
-                          Copy URL to Share
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>⇧</kbd>
-                            <kbd>C</kbd>
-                          </span>
-                        </li>
-                        <li>
-                          Toggle this view
-                          <span className={styles.hotkeys}>
-                            <kbd>⌘</kbd>
-                            <kbd>/</kbd>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-
-                <h4 className={styles.dialogTitle}>Contribute</h4>
-                <p className={styles.dialogDescription}>
-                  This project is Open Source and{" "}
-                  <a
-                    href="https://github.com/raycast/preset-explorer"
-                    title="Preset Explorer on GitHub"
-                  >
-                    available on GitHub
-                  </a>
-                  . We welcome contributions!
-                  <br />
-                  If you have any questions or feedback, please{" "}
-                  <a href="mailto:feedback+rayso@raycast.com?subject=presets">
-                    send us an email
-                  </a>
-                  .
-                </p>
-
-                <p style={{ fontSize: 13, marginTop: 32 }}>
-                  <a
-                    href="https://raycast.com"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 6,
-                    }}
-                  >
-                    Made by{" "}
-                    <span style={{ color: "#FF6363" }}>
-                      <RaycastLogoNegIcon />{" "}
+              <Link
+                href="/"
+                aria-label="Home"
+                className={clsx(
+                  styles.backButton,
+                  isOnSharedPage && styles.isVisible
+                )}
+                aria-disabled={!isOnSharedPage}
+                tabIndex={isOnSharedPage ? 0 : -1}
+              >
+                <ChevronLeftIcon />
+              </Link>
+              <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
+                <DialogTrigger asChild>
+                  <button className={styles.logo}>
+                    <span className={styles.logoIcon}>
+                      <RaycastLogoNegIcon />
                     </span>
-                    <span>Raycast</span>
-                  </a>
-                </p>
-                <div className={styles.aboutGlow} />
-              </DialogContent>
-            </Dialog>
-          </div>
-          {isOnSharedPage && (
-            <div className={styles.navControls}>
-              <ButtonGroup>
-                <Button variant="red" onClick={() => handleAddToRaycast()}>
-                  <PlusCircleIcon /> Add to Raycast
-                </Button>
+                    <h1>Preset Explorer</h1>
+                  </button>
+                </DialogTrigger>
+                <DialogContent className={styles.about} showCloseButton={true}>
+                  <div className={styles.aboutTopContent}>
+                    <div>
+                      <DialogTitle className={styles.dialogTitle}>
+                        About
+                      </DialogTitle>
+                      <DialogDescription className={styles.dialogDescription}>
+                        Preset Explorer is a tool to easily browse, share, and
+                        add presets to <a href="https://raycast.com">Raycast</a>
+                        .
+                      </DialogDescription>
+                      <p className={styles.dialogDescription}>
+                        Open a preset and click the “Add to Raycast” button to
+                        import the preset directly into Raycast. You can also
+                        download the preset as a JSON file, or copy the URL to
+                        share with others.
+                      </p>
+                    </div>
+                    {!isTouch && (
+                      <div>
+                        <h4 className={styles.dialogTitle}>Shortcuts</h4>
+                        <ul className={styles.shortcuts}>
+                          <li>
+                            Add to Raycast
+                            <span className={styles.hotkeys}>
+                              <kbd>⌘</kbd>
+                              <kbd>⏎</kbd>
+                            </span>
+                          </li>
+                          <li>
+                            Toggle Export Menu
+                            <span className={styles.hotkeys}>
+                              <kbd>⌘</kbd>
+                              <kbd>K</kbd>
+                            </span>
+                          </li>
+                          <li>
+                            Download JSON
+                            <span className={styles.hotkeys}>
+                              <kbd>⌘</kbd>
+                              <kbd>D</kbd>
+                            </span>
+                          </li>
+                          <li>
+                            Copy JSON
+                            <span className={styles.hotkeys}>
+                              <kbd>⌘</kbd>
+                              <kbd>⌥</kbd>
+                              <kbd>C</kbd>
+                            </span>
+                          </li>
+                          <li>
+                            Copy URL to Share
+                            <span className={styles.hotkeys}>
+                              <kbd>⌘</kbd>
+                              <kbd>⇧</kbd>
+                              <kbd>C</kbd>
+                            </span>
+                          </li>
+                          <li>
+                            Toggle this view
+                            <span className={styles.hotkeys}>
+                              <kbd>⌘</kbd>
+                              <kbd>/</kbd>
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
 
-                <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="red" aria-label="Export options">
-                      <ChevronDownIcon />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem onSelect={() => handleDownload()}>
-                      <DownloadIcon /> Download JSON
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>D</kbd>
+                  <h4 className={styles.dialogTitle}>Contribute</h4>
+                  <p className={styles.dialogDescription}>
+                    This project is Open Source and{" "}
+                    <a
+                      href="https://github.com/raycast/preset-explorer"
+                      title="Preset Explorer on GitHub"
+                    >
+                      available on GitHub
+                    </a>
+                    . We welcome contributions!
+                    <br />
+                    If you have any questions or feedback, please{" "}
+                    <a href="mailto:feedback+rayso@raycast.com?subject=presets">
+                      send us an email
+                    </a>
+                    .
+                  </p>
+
+                  <p style={{ fontSize: 13, marginTop: 32 }}>
+                    <a
+                      href="https://raycast.com"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 6,
+                      }}
+                    >
+                      Made by{" "}
+                      <span style={{ color: "#FF6363" }}>
+                        <RaycastLogoNegIcon />{" "}
                       </span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={() => handleCopyData()}>
-                      <CopyClipboardIcon /> Copy JSON{" "}
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>⌥</kbd>
-                        <kbd>C</kbd>
-                      </span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={() => handleCopyUrl()}>
-                      <LinkIcon /> Copy URL to Share{" "}
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>⇧</kbd>
-                        <kbd>C</kbd>
-                      </span>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </ButtonGroup>
+                      <span>Raycast</span>
+                    </a>
+                  </p>
+                  <div className={styles.aboutGlow} />
+                </DialogContent>
+              </Dialog>
             </div>
-          )}
-        </header>
-        <Component
-          {...pageProps}
-          onTouchReady={() => setEnableViewObserver(true)}
-          showToast={showToast}
-          setShowToast={setShowToast}
-          setToastMessage={setToastMessage}
-          toastMessage={toastMessage}
-        />
-        <Toast open={showToast} onOpenChange={setShowToast}>
-          <ToastTitle>
-            <CopyClipboardIcon /> {toastMessage}
-          </ToastTitle>
-        </Toast>
-        <ToastViewport />
-      </ToastProvider>
+            {isOnSharedPage && (
+              <div className={styles.navControls}>
+                <ButtonGroup>
+                  <Button variant="red" onClick={() => handleAddToRaycast()}>
+                    <PlusCircleIcon /> Add to Raycast
+                  </Button>
+
+                  <DropdownMenu
+                    open={actionsOpen}
+                    onOpenChange={setActionsOpen}
+                  >
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="red" aria-label="Export options">
+                        <ChevronDownIcon />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onSelect={() => handleDownload()}>
+                        <DownloadIcon /> Download JSON
+                        <span className={styles.hotkeys}>
+                          <kbd>⌘</kbd>
+                          <kbd>D</kbd>
+                        </span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => handleCopyData()}>
+                        <CopyClipboardIcon /> Copy JSON{" "}
+                        <span className={styles.hotkeys}>
+                          <kbd>⌘</kbd>
+                          <kbd>⌥</kbd>
+                          <kbd>C</kbd>
+                        </span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => handleCopyUrl()}>
+                        <LinkIcon /> Copy URL to Share{" "}
+                        <span className={styles.hotkeys}>
+                          <kbd>⌘</kbd>
+                          <kbd>⇧</kbd>
+                          <kbd>C</kbd>
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </ButtonGroup>
+              </div>
+            )}
+          </header>
+          <Component
+            {...pageProps}
+            onTouchReady={() => setEnableViewObserver(true)}
+            showToast={showToast}
+            setShowToast={setShowToast}
+            setToastMessage={setToastMessage}
+            toastMessage={toastMessage}
+          />
+          <Toast open={showToast} onOpenChange={setShowToast}>
+            <ToastTitle>
+              <CopyClipboardIcon /> {toastMessage}
+            </ToastTitle>
+          </Toast>
+          <ToastViewport />
+        </ToastProvider>
+      </TooltipProvider>
       <Analytics />
     </>
   );

@@ -6,10 +6,11 @@ import { categories, Category } from "../data/presets";
 
 import styles from "../styles/Home.module.css";
 import { useSectionInView } from "../utils/useSectionInViewObserver";
-import { StarsIcon } from "@raycast/icons";
+import { Info01Icon, StarsIcon } from "@raycast/icons";
 
 import { PresetComponent } from "../components/Preset";
 import clsx from "clsx";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../components/Tooltip";
 
 export function getStaticPaths() {
   const paths = categories.map((category) => ({
@@ -33,6 +34,15 @@ export async function getStaticProps() {
   };
 }
 
+export const proModels = [
+  "openai_gpt35_turbo",
+  "anthropic_claude_haiku",
+  "mistral_8x7b",
+  "mistral_small",
+  "meta_code_llama_70b",
+  "meta_llama_2_70b",
+];
+
 export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
   const [showAdvancedModels, setShowAdvancedModels] = React.useState(true);
 
@@ -44,14 +54,7 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
         .map((category) => ({
           ...category,
           presets: category.presets.filter((preset) =>
-            [
-              "openai_gpt35_turbo",
-              "anthropic_claude_haiku",
-              "mistral_8x7b",
-              "mistral_small",
-              "meta_code_llama_70b",
-              "meta_llama_2_70b",
-            ].includes(preset.model || "")
+            proModels.includes(preset.model)
           ),
         }))
         .filter((category) => category.presets.length > 0);
@@ -86,15 +89,29 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
               </div>
               <span className={styles.sidebarNavDivider}></span>
               <div className={styles.sidebarNav}>
-                <label className={styles.label}>
-                  Show Advanced AI Models
+                <div className={styles.filter}>
+                  <span className={styles.label}>
+                    <label htmlFor="advancedModels">
+                      Show Advanced AI Models
+                    </label>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Info01Icon />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        Requires Advanced AI add-on to Raycast Pro
+                      </TooltipContent>
+                    </Tooltip>
+                  </span>
+
                   <input
+                    id="advancedModels"
                     type="checkbox"
                     min={0}
                     checked={showAdvancedModels}
                     onChange={(e) => setShowAdvancedModels(e.target.checked)}
                   />
-                </label>
+                </div>
               </div>
             </div>
           </ScrollArea>

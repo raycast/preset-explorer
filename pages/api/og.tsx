@@ -48,7 +48,7 @@ export default async function handler(request: NextRequest) {
           <img
             width="1024"
             height="512"
-            src={bgImageData}
+            src={bgImageData as any}
             style={{
               position: "absolute",
               inset: 0,

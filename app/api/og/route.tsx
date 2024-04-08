@@ -19,14 +19,14 @@ export async function GET(request: Request) {
     const IconComponent = Icons[icon] ? Icons[icon] : null;
 
     const interRegular = await fetch(
-      new URL("../../../public/inter-Regular.ttf", import.meta.url)
+      new URL(`./Inter-Regular.ttf`, import.meta.url)
     ).then((res) => res.arrayBuffer());
     const interSemiBold = await fetch(
-      new URL("../../../public/inter-SemiBold.ttf", import.meta.url)
+      new URL(`./Inter-SemiBold.ttf`, import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     const bgImageData = await fetch(
-      new URL("../../../public/og-bg.png", import.meta.url)
+      new URL(`/og-bg.png`, import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     return new ImageResponse(

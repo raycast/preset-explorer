@@ -332,7 +332,7 @@ type IconComponent = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 export type Category = {
   name: string;
   slug: string;
-  presets: (Preset & { iconComponent: IconComponent })[];
+  presets: Preset[];
   icon: IconName;
   iconComponent: IconComponent;
 };
@@ -392,12 +392,7 @@ const baseCategories: Category[] = [
     return {
       ...category,
       iconComponent: Icons[category.icon],
-      presets: category.presets.map((preset) => {
-        return {
-          ...preset,
-          iconComponent: Icons[preset.icon],
-        };
-      }),
+      presets: category.presets,
     };
   })
   .filter((category) => category.presets.length > 0);

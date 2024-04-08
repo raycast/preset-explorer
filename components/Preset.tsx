@@ -5,13 +5,13 @@ import {
   downloadData,
   makeUrl,
 } from "../utils/actions";
-import { Preset } from "../data/presets";
+import { Preset, allPresets } from "../data/presets";
 import styles from "./Preset.module.css";
 import {
-  CircleProgress25Icon,
   CopyClipboardIcon,
   DownloadIcon,
   Globe01Icon,
+  Icons,
   LinkIcon,
   PlusCircleIcon,
 } from "@raycast/icons";
@@ -50,15 +50,7 @@ export const creativity = {
   maximum: ["Maximum", "Max Creativity"],
 };
 
-export type PresetWithIconComponent = Preset & {
-  iconComponent: React.FC;
-};
-
-type PresetProps = {
-  preset: PresetWithIconComponent;
-};
-
-export function PresetComponent({ preset }: PresetProps) {
+export function PresetComponent({ preset }: { preset: Preset }) {
   const [showToast, setShowToast] = React.useState(false);
   const [toastMessage, setToastMessage] = React.useState("");
   const router = useRouter();
@@ -89,13 +81,15 @@ export function PresetComponent({ preset }: PresetProps) {
 
     const url = makeUrl(preset);
     let urlToCopy = url;
-    const encodedUrl = encodeURIComponent(urlToCopy);
-    const response = await fetch(
-      `https://ray.so/api/shorten-url?url=${encodedUrl}&ref=presets`
-    ).then((res) => res.json());
+    if (!preset.id) {
+      const encodedUrl = encodeURIComponent(urlToCopy);
+      const response = await fetch(
+        `https://ray.so/api/shorten-url?url=${encodedUrl}&ref=presets`
+      ).then((res) => res.json());
 
-    if (response.link) {
-      urlToCopy = response.link;
+      if (response.link) {
+        urlToCopy = response.link;
+      }
     }
 
     copy(urlToCopy);
@@ -111,13 +105,15 @@ export function PresetComponent({ preset }: PresetProps) {
     }
   }, [showToast]);
 
+  const IconComponent = Icons[preset.icon] ? Icons[preset.icon] : null;
+
   return (
     <>
       <ContextMenu.Root>
         <ContextMenu.Trigger>
-          <Link href={makeUrl(preset)} className={styles.item}>
+          <Link href={`/preset/${preset.id}`} className={styles.item}>
             <div className={styles.icon}>
-              <preset.iconComponent />
+              {IconComponent ? <IconComponent /> : null}
             </div>
             <div className={styles.content}>
               <div className={styles.header}>

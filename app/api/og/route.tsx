@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     ).then((res) => res.arrayBuffer());
 
     const bgImageData = await fetch(
-      new URL(`/og-bg.png`, import.meta.url)
+      new URL(`./og-bg.png`, import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     return new ImageResponse(

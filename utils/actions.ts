@@ -72,6 +72,9 @@ export function makeUrl(preset: Preset) {
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
       : "https://presets.ray.so";
+  if (preset.id) {
+    return `${host}/preset/${preset.id}`;
+  }
   return `${host}/shared?${makeQueryString(preset)}`;
 }
 

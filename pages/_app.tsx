@@ -69,36 +69,39 @@ function MyApp({ Component, pageProps }: AppProps) {
   useSectionInViewObserver({ headerHeight: 72, enabled: enableViewObserver });
 
   const router = useRouter();
-  const isOnSharedPage = router.pathname.includes("/shared");
+  const isOnPresetPage =
+    router.pathname.includes("/shared") || router.pathname.includes("/preset");
 
-  const preset: Preset = React.useMemo(
-    () => parseURLPreset(router?.query.preset as string),
-    [router.query]
-  );
+  const preset: Preset | null = pageProps.preset;
 
   const handleDownload = React.useCallback(() => {
+    if (!preset) return;
     downloadData(preset);
   }, [preset]);
 
   const handleCopyData = React.useCallback(() => {
+    if (!preset) return;
     copyData(preset);
     setToastMessage("Copied to clipboard");
     setShowToast(true);
   }, [preset]);
 
   const handleCopyUrl = React.useCallback(async () => {
+    if (!preset) return;
     setToastMessage("Copying URL to clipboard...");
     setShowToast(true);
 
     const url = makeUrl(preset);
     let urlToCopy = url;
-    const encodedUrl = encodeURIComponent(urlToCopy);
-    const response = await fetch(
-      `https://ray.so/api/shorten-url?url=${encodedUrl}&ref=presets`
-    ).then((res) => res.json());
+    if (!preset.id) {
+      const encodedUrl = encodeURIComponent(urlToCopy);
+      const response = await fetch(
+        `https://ray.so/api/shorten-url?url=${encodedUrl}&ref=presets`
+      ).then((res) => res.json());
 
-    if (response.link) {
-      urlToCopy = response.link;
+      if (response.link) {
+        urlToCopy = response.link;
+      }
     }
 
     copy(urlToCopy);
@@ -106,10 +109,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     setToastMessage("Copied URL to clipboard!");
   }, [preset]);
 
-  const handleAddToRaycast = React.useCallback(
-    () => addToRaycast(router, preset),
-    [router, preset]
-  );
+  const handleAddToRaycast = React.useCallback(() => {
+    if (!preset) return;
+    return addToRaycast(router, preset);
+  }, [router, preset]);
 
   React.useEffect(() => {
     setIsTouch(isTouchDevice());
@@ -208,7 +211,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <div
               className={clsx(
                 styles.logoContainer,
-                isOnSharedPage && styles.isOffset
+                isOnPresetPage && styles.isOffset
               )}
             >
               <Link
@@ -216,10 +219,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 aria-label="Home"
                 className={clsx(
                   styles.backButton,
-                  isOnSharedPage && styles.isVisible
+                  isOnPresetPage && styles.isVisible
                 )}
-                aria-disabled={!isOnSharedPage}
-                tabIndex={isOnSharedPage ? 0 : -1}
+                aria-disabled={!isOnPresetPage}
+                tabIndex={isOnPresetPage ? 0 : -1}
               >
                 <ChevronLeftIcon />
               </Link>
@@ -342,7 +345,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </DialogContent>
               </Dialog>
             </div>
-            {isOnSharedPage && (
+            {isOnPresetPage && (
               <div className={styles.navControls}>
                 <ButtonGroup>
                   <Button variant="red" onClick={() => handleAddToRaycast()}>

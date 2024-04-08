@@ -11,6 +11,7 @@ import { Info01Icon, StarsIcon } from "@raycast/icons";
 import { PresetComponent } from "../components/Preset";
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/Tooltip";
+import Head from "next/head";
 
 export function getStaticPaths() {
   const paths = categories.map((category) => ({
@@ -65,83 +66,98 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
     onTouchReady();
   }, [onTouchReady]);
 
+  const pageTitle = "Preset Explorer by Raycast";
+  const pageDescription = "Easily browse, share, and add presets to Raycast.";
+
   return (
-    <div className={styles.main}>
-      <div className={styles.sidebar}>
-        <div className={styles.sidebarInner}>
-          <ScrollArea>
-            <div className={styles.sidebarContent}>
-              <div className={styles.sidebarNav}>
-                <p className={styles.sidebarTitle}>Categories</p>
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} />
+        <meta name="description" content={pageDescription} />
+        <meta property="og:description" content={pageDescription} />
+        <meta
+          property="og:image"
+          content="https://presets.ray.so/og-image.png"
+        />
+      </Head>
+      <div className={styles.main}>
+        <div className={styles.sidebar}>
+          <div className={styles.sidebarInner}>
+            <ScrollArea>
+              <div className={styles.sidebarContent}>
+                <div className={styles.sidebarNav}>
+                  <p className={styles.sidebarTitle}>Categories</p>
 
-                {categories.map((category) => (
-                  <NavItem
-                    key={category.slug}
-                    category={category}
-                    disabled={
-                      !filteredCategories.some(
-                        (filteredCategory) =>
-                          filteredCategory.slug === category.slug
-                      )
-                    }
-                  />
-                ))}
-              </div>
-              <span className={styles.sidebarNavDivider}></span>
-              <div className={styles.sidebarNav}>
-                <div className={styles.filter}>
-                  <span className={styles.label}>
-                    <label htmlFor="advancedModels">
-                      Show Advanced AI Models
-                    </label>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Info01Icon />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        Requires Advanced AI add-on to Raycast Pro
-                      </TooltipContent>
-                    </Tooltip>
-                  </span>
+                  {categories.map((category) => (
+                    <NavItem
+                      key={category.slug}
+                      category={category}
+                      disabled={
+                        !filteredCategories.some(
+                          (filteredCategory) =>
+                            filteredCategory.slug === category.slug
+                        )
+                      }
+                    />
+                  ))}
+                </div>
+                <span className={styles.sidebarNavDivider}></span>
+                <div className={styles.sidebarNav}>
+                  <div className={styles.filter}>
+                    <span className={styles.label}>
+                      <label htmlFor="advancedModels">
+                        Show Advanced AI Models
+                      </label>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Info01Icon />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          Requires Advanced AI add-on to Raycast Pro
+                        </TooltipContent>
+                      </Tooltip>
+                    </span>
 
-                  <input
-                    id="advancedModels"
-                    type="checkbox"
-                    min={0}
-                    checked={showAdvancedModels}
-                    onChange={(e) => setShowAdvancedModels(e.target.checked)}
-                  />
+                    <input
+                      id="advancedModels"
+                      type="checkbox"
+                      min={0}
+                      checked={showAdvancedModels}
+                      onChange={(e) => setShowAdvancedModels(e.target.checked)}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </ScrollArea>
+            </ScrollArea>
+          </div>
+        </div>
+
+        <div className={styles.container}>
+          {filteredCategories.map((category) => {
+            return (
+              <div
+                key={category.name}
+                data-section-slug={category.slug}
+                style={{
+                  outline: "none",
+                }}
+                tabIndex={-1}
+              >
+                <h2 className={styles.subtitle}>
+                  <category.iconComponent /> {category.name}
+                </h2>
+                <div className={styles.presets}>
+                  {category.presets.map((preset) => (
+                    <PresetComponent key={preset.id} preset={preset} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-
-      <div className={styles.container}>
-        {filteredCategories.map((category) => {
-          return (
-            <div
-              key={category.name}
-              data-section-slug={category.slug}
-              style={{
-                outline: "none",
-              }}
-              tabIndex={-1}
-            >
-              <h2 className={styles.subtitle}>
-                <category.iconComponent /> {category.name}
-              </h2>
-              <div className={styles.presets}>
-                {category.presets.map((preset) => (
-                  <PresetComponent key={preset.id} preset={preset} />
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    </>
   );
 }
 

@@ -23,12 +23,13 @@
     "clsx": "^2.1.0",
     "copy-to-clipboard": "^3.3.3",
     "lodash.debounce": "^4.0.8",
-    "next": "^13.4.4",
+    "next": "^14.1.4",
     "postcss": "^8.4.24",
     "postcss-nested": "^5.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-markdown": "^8.0.7"
+    "react-markdown": "^8.0.7",
+    "typescript": "^5.4.4"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.9",

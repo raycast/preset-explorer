@@ -188,24 +188,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="icon" type="image/x-icon" href={`/favicon.png`} />
-        <title>Preset Explorer by Raycast</title>
-
-        <meta
-          property="og:image"
-          content="https://presets.ray.so/og-image.png"
-          key="og-image"
-        />
-        <meta
-          property="og:title"
-          content="Preset Explorer by Raycast"
-          key="og-title"
-        />
-        <meta
-          property="og:description"
-          content="Easily browse, share, and add presets to Raycast."
-          key="og-description"
-        />
-
         <meta property="og:type" content="website" key="og-type" />
         <meta
           property="twitter:card"
@@ -213,10 +195,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           key="twitter-card"
         />
         <meta property="twitter:site" content="@raycastapp" />
-        <meta
-          name="description"
-          content="Easily browse, share, and add presets to Raycast."
-        />
       </Head>
       <TooltipProvider delayDuration={0}>
         <ToastProvider swipeDirection="down">

@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import React from "react";
 import copy from "copy-to-clipboard";
 
@@ -25,17 +25,22 @@ import Head from "next/head";
 import { proModels } from "./[[...slug]]";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/Tooltip";
 
-export default function PresetPage() {
+export const getServerSideProps: GetServerSideProps<{
+  preset: Preset;
+}> = async (context) => {
+  const { query } = context;
+  const preset = parseURLPreset(query.preset as string);
+
+  return { props: { preset } };
+};
+
+export default function PresetPage({
+  preset,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [showCopied, setShowCopied] = React.useState(false);
   const [relatedPresets, setRelatedPresets] = React.useState<
     PresetWithIconComponent[]
   >([]);
-
-  const router = useRouter();
-  const preset: Preset = React.useMemo(
-    () => parseURLPreset(router.query.preset as string),
-    [router.query]
-  );
 
   React.useEffect(() => {
     if (showCopied) {
@@ -77,11 +82,24 @@ export default function PresetPage() {
     setShowCopied(true);
   };
 
+  const pageTitle = `${title} - Raycast Preset`;
+
   return (
     <>
       <Head>
-        <title>{title} - Raycast Preset</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={description} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content="https://presets.ray.so/og-image.png"
+          key="og-image"
+        />
+        <meta name="twitter:label1" content="Model" />
+        <meta name="twitter:data1" content={aiModel[model][1]} />
+        <meta name="twitter:label2" content="Creativity" />
+        <meta name="twitter:data2" content={creativityString[creativity][0]} />
       </Head>
       <div className={styles.container}>
         <header className={styles.header}>
@@ -117,7 +135,7 @@ export default function PresetPage() {
               <h3 className={styles.compactTitle}>Model</h3>
               <div className={styles.metaContent}>
                 <ModelIcon model={model} />
-                {model ? aiModel[model][1] : "Unknown"}
+                {aiModel[model][1]}
                 {!proModels.includes(model) && (
                   <Tooltip>
                     <TooltipTrigger>

@@ -1,13 +1,11 @@
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
 import { Icons, RaycastLogoNegIcon } from "@raycast/icons";
-import { Preset } from "../../data/presets";
+import { Preset } from "../../../data/presets";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
-export default async function handler(request: NextRequest) {
+export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
 
@@ -21,14 +19,14 @@ export default async function handler(request: NextRequest) {
     const IconComponent = Icons[icon] ? Icons[icon] : null;
 
     const interRegular = await fetch(
-      new URL("../../public/inter-Regular.ttf", import.meta.url)
+      new URL("../../../public/inter-Regular.ttf", import.meta.url)
     ).then((res) => res.arrayBuffer());
     const interSemiBold = await fetch(
-      new URL("../../public/inter-SemiBold.ttf", import.meta.url)
+      new URL("../../../public/inter-SemiBold.ttf", import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     const bgImageData = await fetch(
-      new URL("../../public/og-bg.png", import.meta.url)
+      new URL("../../../public/og-bg.png", import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     return new ImageResponse(

@@ -14,8 +14,8 @@ import { creativity as creativityString } from "./Preset";
 import CreativityIcon from "./CreativityIcon";
 import ModelIcon from "./ModelIcon";
 
-import { allPresets, Preset } from "../data/presets";
-import styles from "../styles/Shared.module.css";
+import { Preset } from "../data/presets";
+import styles from "./PresetDetail.module.css";
 import Head from "next/head";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 import { proModels } from "../pages/[[...slug]]";
@@ -45,7 +45,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
     description,
     instructions,
     creativity,
-    icon,
+    icon = "stars",
     model,
     web_search,
   } = preset;
@@ -57,7 +57,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
     setShowCopied(true);
   };
 
-  const pageTitle = `${title} - Raycast Preset`;
+  const pageTitle = `${title} - Raycast AI Preset`;
 
   return (
     <>

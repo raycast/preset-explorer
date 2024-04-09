@@ -2,6 +2,7 @@ import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
 import { Icons, RaycastLogoNegIcon } from "@raycast/icons";
 import { Preset } from "../../../data/presets";
+import { CSSProperties } from "react";
 
 export const runtime = "edge";
 
@@ -11,11 +12,12 @@ export async function GET(request: Request) {
 
     const hasTitle = searchParams.has("title");
     const title = hasTitle ? searchParams.get("title")?.slice(0, 100) : "";
-    const hasDescription = searchParams.has("description");
-    const description = hasDescription
-      ? searchParams.get("description")?.slice(0, 240)
-      : "Raycast AI Preset";
-    const icon = searchParams.get("icon") as Preset["icon"];
+    const description = searchParams.get("description") || "Raycast AI Preset";
+    const ellipsedDescription =
+      description.length > 120
+        ? `${description.slice(0, 120)}...`
+        : description;
+    const icon = (searchParams.get("icon") || "stars") as Preset["icon"];
     const IconComponent = Icons[icon] ? Icons[icon] : null;
 
     const interRegular = await fetch(
@@ -68,23 +70,23 @@ export async function GET(request: Request) {
                 style={{
                   color: "white",
                   display: "flex",
-                  border: "1px solid rgba(255, 255, 255, 0.20)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
                   borderRadius: "9999px",
                   backgroundImage:
                     "radial-gradient(150.08% 117.14% at 31.25% 9.37%, #171717 0%, #000 100%)",
-                  width: 88,
-                  height: 88,
+                  width: 110,
+                  height: 110,
                   alignItems: "center",
                   justifyContent: "center",
-                  marginBottom: 16,
+                  marginBottom: 24,
                 }}
               >
-                {IconComponent && <IconComponent width={44} height={44} />}
+                {IconComponent && <IconComponent width={48} height={48} />}
               </div>
             )}
             <div
               style={{
-                fontSize: 60,
+                fontSize: 68,
                 fontStyle: "normal",
                 letterSpacing: "-0.025em",
                 color: "white",
@@ -93,24 +95,34 @@ export async function GET(request: Request) {
                 fontWeight: 600,
                 whiteSpace: "nowrap",
                 fontFamily: "Inter",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                maxWidth: "100%",
               }}
             >
               {title}
             </div>
             {description && (
               <div
-                style={{
-                  fontSize: 28,
-                  color: "rgba(255, 255, 255, 0.60)",
-                  marginTop: 16,
-                  textAlign: "center",
-                  lineHeight: 1.55,
-                  fontFamily: "Inter",
-                  paddingLeft: 100,
-                  paddingRight: 100,
-                }}
+                style={
+                  {
+                    display: "flex",
+                    flexDirection: "row",
+                    fontSize: 34,
+                    color: "rgba(255, 255, 255, 0.60)",
+                    marginTop: 16,
+                    textAlign: "center",
+                    lineHeight: 1.55,
+                    fontFamily: "Inter",
+                    paddingLeft: 70,
+                    paddingRight: 70,
+                    textWrap: "balance",
+                    maxHeight: 105,
+                    overflow: "hidden",
+                  } as CSSProperties
+                }
               >
-                {description}
+                {ellipsedDescription}
               </div>
             )}
           </div>
@@ -119,14 +131,14 @@ export async function GET(request: Request) {
               display: "flex",
               alignItems: "center",
               color: "white",
-              fontSize: 26,
+              fontSize: 30,
               fontWeight: 400,
               gap: 16,
               paddingBottom: 32,
             }}
           >
             <RaycastLogoNegIcon
-              style={{ color: "#FF6362", width: 36, height: 36 }}
+              style={{ color: "#FF6362", width: 46, height: 46 }}
             />{" "}
             By Raycast
           </div>

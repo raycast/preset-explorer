@@ -135,7 +135,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               </div>
             </div>
             <div className={styles.metaItem}>
-              <h3 className={styles.compactTitle}>Automatic Web Search</h3>
+              <h3 className={styles.compactTitle}>Web Search</h3>
               <div className={styles.metaContent}>
                 {web_search ? <Globe01Icon /> : <XMarkCircleIcon />}
                 {web_search ? "Enabled" : "Disabled"}

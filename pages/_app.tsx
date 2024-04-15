@@ -326,7 +326,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
                   <p style={{ fontSize: 13, marginTop: 32 }}>
                     <a
-                      href="https://raycast.com"
+                      href="https://raycast.com?ref=presets"
                       style={{
                         display: "flex",
                         alignItems: "center",

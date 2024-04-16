@@ -1,6 +1,6 @@
 import copy from "copy-to-clipboard";
 import { NextRouter } from "next/router";
-import { Preset } from "../data/presets";
+import { Model, Preset } from "../data/presets";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -9,11 +9,11 @@ const raycastProtocolForEnvironments = {
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
-function prepareModel(model?: string) {
+function prepareModel(model: Model) {
   if (model && /^".*"$/.test(model)) {
     return model.slice(1, model.length - 1);
   }
-  return model || "openai_gpt35_turbo";
+  return model;
 }
 
 function makePresetImportData(preset: Preset): string {

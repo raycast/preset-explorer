@@ -1,6 +1,20 @@
 import { IconName, Icons } from "@raycast/icons";
 import { SVGProps } from "react";
 
+export type Model =
+  | "openai-gpt-3.5-turbo-instruct"
+  | "openai-gpt-3.5-turbo"
+  | "openai-gpt-4"
+  | "openai-gpt-4-turbo"
+  | "anthropic-claude-haiku"
+  | "anthropic-claude-opus"
+  | "anthropic-claude-sonnet"
+  | "perplexity-sonar-medium-online"
+  | "perplexity-sonar-small-online"
+  | "llama2-70b"
+  | "mixtral-8x7b"
+  | "codellama-70b-instruct";
+
 export type Preset = {
   id: string;
   name: string;
@@ -8,22 +22,7 @@ export type Preset = {
   instructions: string;
   icon: IconName;
   creativity: "none" | "low" | "medium" | "high" | "maximum";
-  model:
-    | "openai_davinci_003"
-    | "openai_gpt35_turbo"
-    | "openai_gpt4"
-    | "openai_gpt4_turbo"
-    | "anthropic_claude_opus"
-    | "anthropic_claude_haiku"
-    | "anthropic_claude_sonnet"
-    | "perplexity_sonar_small"
-    | "perplexity_sonar_medium"
-    | "mistral_8x7b"
-    | "mistral_small"
-    | "mistral_medium"
-    | "mistral_large"
-    | "meta_code_llama_70b"
-    | "meta_llama_2_70b";
+  model: Model;
   web_search?: boolean;
   date: `${number}-${number}-${number}`;
   author?: {
@@ -49,7 +48,7 @@ Here are some rules:
       "Pair program with an expert in React, providing expert-level insights and solutions.",
     icon: "code",
     creativity: "low",
-    model: "openai_gpt4_turbo",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
   },
   {
@@ -68,7 +67,7 @@ Here are some rules:
       "An expert developer, helping you with your Swift programming questions.",
     icon: "code",
     creativity: "low",
-    model: "openai_gpt4_turbo",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
   },
   {
@@ -87,7 +86,7 @@ Here are some rules:
       "A Python expert knowledgeable in the latest best practices and solutions.",
     icon: "code",
     creativity: "low",
-    model: "openai_gpt4_turbo",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
   },
   {
@@ -123,7 +122,7 @@ Here are some rules to follow:
       "Work with an expert in the trendy stack of Tailwind CSS, React and Next.js.",
     icon: "code",
     creativity: "low",
-    model: "openai_gpt4_turbo",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
   },
   {
@@ -139,7 +138,7 @@ Here are some rules to follow:
       "An expert in Framer Motion, helping you create delightful React Animations for the web.",
     icon: "stars",
     creativity: "low",
-    model: "openai_gpt4_turbo",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
   },
 ];
@@ -161,7 +160,7 @@ Here are the rules you must follow:
       "A graphic designer that specializes in logo design, creating professional logos for your business or hobby.",
     icon: "image",
     creativity: "maximum",
-    model: "openai_gpt4",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
   },
 ];
@@ -186,7 +185,7 @@ Here are the rules you must follow:
       "A writing coach that helps you improve your writing skills and corrects your spelling, grammar and punctuation mistakes.",
     icon: "pencil",
     creativity: "low",
-    model: "openai_gpt35_turbo",
+    model: "openai-gpt-3.5-turbo",
     date: "2024-03-26",
   },
   {
@@ -206,7 +205,7 @@ Here are the rules you must follow:
       "Helps you with the correct pronunciation of anything you ask for.",
     icon: "quote-block",
     creativity: "low",
-    model: "openai_gpt4",
+    model: "openai-gpt-4-turbo",
     date: "2024-03-26",
     web_search: true,
   },
@@ -233,7 +232,7 @@ const fun: Preset[] = [
       "Imagine google translate but it turns everything into emojis, what else could you need?",
     icon: "emoji",
     creativity: "maximum",
-    model: "openai_gpt4",
+    model: "openai-gpt-4",
     web_search: true,
     date: "2024-03-26",
   },
@@ -257,7 +256,7 @@ Here are the rules the player should follow:
       "Play the classic game “20 Questions” by letting the AI guess what you are thinking on!",
     icon: "question-mark-circle",
     creativity: "maximum",
-    model: "anthropic_claude_opus",
+    model: "anthropic-claude-opus",
     date: "2024-03-26",
   },
   {
@@ -285,7 +284,7 @@ Here are some rules you must follow:
       "A friendly AI designed to provide support, encouragement, and companionship.",
     icon: "heart",
     creativity: "maximum",
-    model: "openai_gpt4",
+    model: "openai-gpt-4",
     date: "2024-03-26",
     web_search: true,
   },
@@ -321,7 +320,7 @@ const misc: Preset[] = [
     description: "Stay up to date with the latest news and current events.",
     icon: "blank-document",
     creativity: "none",
-    model: "anthropic_claude_opus",
+    model: "anthropic-claude-opus",
     date: "2024-03-26",
     web_search: true,
   },

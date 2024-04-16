@@ -5,7 +5,7 @@ import {
   downloadData,
   makeUrl,
 } from "../utils/actions";
-import { Preset, allPresets } from "../data/presets";
+import { Model, Preset, allPresets } from "../data/presets";
 import styles from "./Preset.module.css";
 import {
   CopyClipboardIcon,
@@ -24,22 +24,26 @@ import React from "react";
 import { Toast, ToastTitle } from "./Toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 
-export const aiModel = {
-  openai_davinci_003: ["Davinci", "Davinci-3"],
-  openai_gpt35_turbo: ["GPT-3.5", "Open AI GPT-3.5 Turbo"],
-  openai_gpt4: ["GPT-4", "Open AI GPT-4"],
-  openai_gpt4_turbo: ["GPT-4 Turbo", "Open AI GPT-4 Turbo"],
-  anthropic_claude_opus: ["Claude", "Antrophic Claude Opus"],
-  anthropic_claude_haiku: ["Claude", "Antrophic Claude Haiku"],
-  anthropic_claude_sonnet: ["Claude", "Antrophic Claude Sonnet"],
-  perplexity_sonar_small: ["Sonar", "Perplexity Sonar Small"],
-  perplexity_sonar_medium: ["Sonar", "Perplexity Sonar Medium"],
-  mistral_8x7b: ["Mistral", "Mistral 8x7b"],
-  mistral_small: ["Mistral", "Mistral Small"],
-  mistral_medium: ["Mistral", "Mistral Medium"],
-  mistral_large: ["Mistral", "Mistral Large"],
-  meta_code_llama_70b: ["Code Llama 70b", "Meta Code Llama 70b"],
-  meta_llama_2_70b: ["Llama 70b", "Meta Llama 70b"],
+export type AiModelType = {
+  [key in Model]: [string, string];
+};
+
+export const aiModel: AiModelType = {
+  "openai-gpt-3.5-turbo": ["GPT-3.5", "Open AI GPT-3.5 Turbo"],
+  "openai-gpt-3.5-turbo-instruct": [
+    "GPT-3.5",
+    "Open AI GPT-3.5 Turbo Instruct",
+  ],
+  "openai-gpt-4": ["GPT-4", "Open AI GPT-4"],
+  "openai-gpt-4-turbo": ["GPT-4 Turbo", "Open AI GPT-4 Turbo"],
+  "anthropic-claude-opus": ["Claude", "Antrophic Claude Opus"],
+  "anthropic-claude-haiku": ["Claude", "Antrophic Claude Haiku"],
+  "anthropic-claude-sonnet": ["Claude", "Antrophic Claude Sonnet"],
+  "perplexity-sonar-small-online": ["Sonar", "Perplexity Sonar Small"],
+  "perplexity-sonar-medium-online": ["Sonar", "Perplexity Sonar Medium"],
+  "mixtral-8x7b": ["Mistral", "Mistral 8x7b"],
+  "codellama-70b-instruct": ["Code Llama 70b", "Meta Code Llama 70b"],
+  "llama2-70b": ["Llama 70b", "Meta Llama 70b"],
 };
 
 export const creativity = {

@@ -118,7 +118,7 @@ export function PresetComponent({ preset }: { preset: Preset }) {
             <div className={styles.content}>
               <div className={styles.header}>
                 <p className={styles.name}>
-                  {preset.title}
+                  {preset.name}
                   {preset.author ? (
                     <span className={styles.presetAuthor}>
                       by{" "}

@@ -3,7 +3,7 @@ import { SVGProps } from "react";
 
 export type Preset = {
   id: string;
-  title: string;
+  name: string;
   description?: string;
   instructions: string;
   icon: IconName;
@@ -35,7 +35,7 @@ export type Preset = {
 const code: Preset[] = [
   {
     id: "react-expert",
-    title: "React Expert",
+    name: "React Expert",
     instructions: `You are a React Developer that provides expert-level insights and solutions. 
 Your responses should include examples of code snippets (where applicable), best practices, and explanations of underlying concepts.
 
@@ -54,7 +54,7 @@ Here are some rules:
   },
   {
     id: "swift-expert",
-    title: "Swift Expert",
+    name: "Swift Expert",
     instructions: `You are a Swift Developer that provides expert-level insights and solutions. 
 Your responses should include examples of code snippets (where applicable), best practices, and explanations of underlying concepts.
 
@@ -73,7 +73,7 @@ Here are some rules:
   },
   {
     id: "python-expert",
-    title: "Python Expert",
+    name: "Python Expert",
     instructions: `You are a Python Developer that provides expert-level insights and solutions. 
 Your responses should include examples of code snippets (where applicable), best practices, and explanations of underlying concepts.
 
@@ -92,7 +92,7 @@ Here are some rules:
   },
   {
     id: "web-dev",
-    title: "Web Dev Expert",
+    name: "Web Dev Expert",
     instructions: `You are in expert in React, Next.js and TailwindCSS.
 
 When asked about a problem only reply with solutions that works with these technologies.
@@ -128,7 +128,7 @@ Here are some rules to follow:
   },
   {
     id: "framer-motion-expert",
-    title: "Framer Motion Expert",
+    name: "Framer Motion Expert",
     instructions: `You are an expert in the animation library Framer Motion. You ship delightful animations in React to production.
 
     Here are some rules:
@@ -149,7 +149,7 @@ const communication: Preset[] = [];
 const image: Preset[] = [
   {
     id: "logo-designer",
-    title: "Logo Designer",
+    name: "Logo Designer",
     instructions: `You are a graphic designer that specializes in logo design.
 
 Here are the rules you must follow:
@@ -169,7 +169,7 @@ Here are the rules you must follow:
 const writing: Preset[] = [
   {
     id: "writing-coach",
-    title: "Writing Coach",
+    name: "Writing Coach",
     instructions: `Act as a spelling corrector and improver. 
 
 Here are the rules you must follow:
@@ -191,7 +191,7 @@ Here are the rules you must follow:
   },
   {
     id: "pronounciation-assistant",
-    title: "Pronounciation Assistant",
+    name: "Pronounciation Assistant",
     instructions: `You are a pronunciation expert.
 
 Example: I need to go to the bathroom
@@ -219,7 +219,7 @@ const ideas: Preset[] = [];
 const fun: Preset[] = [
   {
     id: "emoji-converter",
-    title: "Emoji Converter",
+    name: "Emoji Converter",
     instructions: `You are an Emoji Master, rephrase everything I write in emojis.
 
   Example:
@@ -239,7 +239,7 @@ const fun: Preset[] = [
   },
   {
     id: "20-questions",
-    title: "20 Questions Host",
+    name: "20 Questions Host",
     instructions: `You are the host of the game “20 questions”
 
 The player is thinking of a specific object, place, person or concept and your job is to guess what they are thinking about by asking up to 20 yes-or-no questions.
@@ -262,7 +262,7 @@ Here are the rules the player should follow:
   },
   {
     id: "buddy",
-    title: "Buddy",
+    name: "Buddy",
     instructions: `Act as my buddy, designed to be supportive, friendly and providing encouragement, positivity and companionship.
 
 Tone of voice:
@@ -294,7 +294,7 @@ Here are some rules you must follow:
 const misc: Preset[] = [
   {
     id: "news-reader",
-    title: "News Reader",
+    name: "News Reader",
     instructions: `Act as an expert in news and the current state of events. Whenever prompted reply with a list of recent stories.
 
   Here are the rules you must follow:

@@ -17,9 +17,9 @@ function prepareModel(model?: string) {
 }
 
 function makePresetImportData(preset: Preset): string {
-  const { title, instructions, creativity, icon, model, web_search } = preset;
+  const { name, instructions, creativity, icon, model, web_search } = preset;
   return `[${JSON.stringify({
-    title,
+    name,
     instructions,
     creativity,
     icon,
@@ -30,7 +30,7 @@ function makePresetImportData(preset: Preset): string {
 
 function makeQueryString(preset: Preset): string {
   const {
-    title,
+    name,
     instructions,
     description,
     creativity,
@@ -42,7 +42,7 @@ function makeQueryString(preset: Preset): string {
 
   return `preset=${encodeURIComponent(
     JSON.stringify({
-      title,
+      name,
       description,
       instructions,
       creativity,

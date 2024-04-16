@@ -41,7 +41,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
   }
 
   const {
-    title,
+    name,
     description,
     instructions,
     creativity,
@@ -57,7 +57,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
     setShowCopied(true);
   };
 
-  const pageTitle = `${title} - Raycast AI Preset`;
+  const pageTitle = `${name} - Raycast AI Preset`;
 
   return (
     <>
@@ -69,7 +69,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
         <meta
           property="og:image"
           content={`https://presets.ray.so/api/og?title=${encodeURIComponent(
-            title
+            name
           )}&description=${encodeURIComponent(description || "")}&icon=${icon}`}
           key="og-image"
         />
@@ -86,7 +86,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
             </div>
           )}
           <div className={styles.content}>
-            <h1 className={styles.title}>{title}</h1>
+            <h1 className={styles.title}>{name}</h1>
             <h2 className={styles.description}>{description}</h2>
           </div>
         </header>

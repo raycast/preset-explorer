@@ -17,7 +17,15 @@ function prepareModel(model: Model) {
 }
 
 function makePresetImportData(preset: Preset): string {
-  const { name, instructions, creativity, icon, model, web_search } = preset;
+  const {
+    name,
+    instructions,
+    creativity,
+    icon,
+    model,
+    web_search,
+    image_generation,
+  } = preset;
   return `[${JSON.stringify({
     name,
     instructions,
@@ -25,6 +33,7 @@ function makePresetImportData(preset: Preset): string {
     icon,
     model: prepareModel(model),
     web_search,
+    image_generation,
   })}]`;
 }
 
@@ -37,6 +46,7 @@ function makeQueryString(preset: Preset): string {
     icon,
     model,
     web_search,
+    image_generation,
     id,
   } = preset;
 
@@ -49,6 +59,7 @@ function makeQueryString(preset: Preset): string {
       icon,
       model: prepareModel(model),
       web_search,
+      image_generation,
       id,
     })
   )}`;

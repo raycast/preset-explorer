@@ -5,13 +5,14 @@ import {
   downloadData,
   makeUrl,
 } from "../utils/actions";
-import { Model, Preset, allPresets } from "../data/presets";
+import { Model, Preset } from "../data/presets";
 import styles from "./Preset.module.css";
 import {
   CopyClipboardIcon,
   DownloadIcon,
   Globe01Icon,
   Icons,
+  ImageIcon,
   LinkIcon,
   PlusCircleIcon,
 } from "@raycast/icons";
@@ -23,6 +24,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Toast, ToastTitle } from "./Toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
+import { IconComponent } from "./Icons";
 
 export type AiModelType = {
   [key in Model]: [string, string];
@@ -109,15 +111,13 @@ export function PresetComponent({ preset }: { preset: Preset }) {
     }
   }, [showToast]);
 
-  const IconComponent = Icons[preset.icon] ? Icons[preset.icon] : null;
-
   return (
     <>
       <ContextMenu.Root>
         <ContextMenu.Trigger>
           <Link href={`/preset/${preset.id}`} className={styles.item}>
             <div className={styles.icon}>
-              {IconComponent ? <IconComponent /> : null}
+              <IconComponent icon={preset.icon} />
             </div>
             <div className={styles.content}>
               <div className={styles.header}>
@@ -170,12 +170,26 @@ export function PresetComponent({ preset }: { preset: Preset }) {
                       <TooltipTrigger>
                         <span className={styles.metaItem}>
                           <Globe01Icon />
-                          Web Search
+                          {!preset.image_generation && "Web"}
                         </span>
                       </TooltipTrigger>
                       <TooltipContent>
                         Searches the web if context is missing
                       </TooltipContent>
+                    </Tooltip>
+                  </>
+                ) : null}
+                {preset.image_generation ? (
+                  <>
+                    <span className={styles.metaDivider} />
+                    <Tooltip delayDuration={700}>
+                      <TooltipTrigger>
+                        <span className={styles.metaItem}>
+                          <ImageIcon />
+                          {!preset.web_search && "Image"}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>Let AI generate images</TooltipContent>
                     </Tooltip>
                   </>
                 ) : null}

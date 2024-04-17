@@ -2,7 +2,7 @@ import React from "react";
 import NextLink from "next/link";
 import { ScrollArea } from "../components/ScrollArea";
 
-import { categories, Category } from "../data/presets";
+import { categories, Category, Model } from "../data/presets";
 
 import styles from "../styles/Home.module.css";
 import { useSectionInView } from "../utils/useSectionInViewObserver";
@@ -35,13 +35,12 @@ export async function getStaticProps() {
   };
 }
 
-export const proModels = [
-  "openai_gpt35_turbo",
-  "anthropic_claude_haiku",
-  "mistral_8x7b",
-  "mistral_small",
-  "meta_code_llama_70b",
-  "meta_llama_2_70b",
+export const proModels: Model[] = [
+  "openai-gpt-3.5-turbo",
+  "anthropic-claude-haiku",
+  "mixtral-8x7b",
+  "codellama-70b-instruct",
+  "llama2-70b",
 ];
 
 export default function Home({ onTouchReady }: { onTouchReady: () => void }) {

@@ -6,6 +6,7 @@ import {
   CopyClipboardIcon,
   Globe01Icon,
   Icons,
+  ImageIcon,
   XMarkCircleIcon,
 } from "@raycast/icons";
 
@@ -19,6 +20,7 @@ import styles from "./PresetDetail.module.css";
 import Head from "next/head";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 import { proModels } from "../pages/[[...slug]]";
+import { IconComponent } from "./Icons";
 
 type PresetPageProps = {
   preset: Preset;
@@ -48,9 +50,8 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
     icon = "stars",
     model,
     web_search,
+    image_generation,
   } = preset;
-
-  const IconComponent = Icons[icon] ? Icons[icon] : null;
 
   const handleCopyInstructions = () => {
     copy(instructions);
@@ -80,9 +81,9 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
       </Head>
       <div className={styles.container}>
         <header className={styles.header}>
-          {IconComponent && (
+          {preset.icon && (
             <div className={styles.icon}>
-              <IconComponent />
+              <IconComponent icon={preset.icon} />
             </div>
           )}
           <div className={styles.content}>
@@ -139,6 +140,13 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <div className={styles.metaContent}>
                 {web_search ? <Globe01Icon /> : <XMarkCircleIcon />}
                 {web_search ? "Enabled" : "Disabled"}
+              </div>
+            </div>
+            <div className={styles.metaItem}>
+              <h3 className={styles.compactTitle}>Image Generation</h3>
+              <div className={styles.metaContent}>
+                {image_generation ? <ImageIcon /> : <XMarkCircleIcon />}
+                {image_generation ? "Enabled" : "Disabled"}
               </div>
             </div>
           </div>

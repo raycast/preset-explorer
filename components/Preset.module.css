@@ -20,6 +20,7 @@
 
     .icon {
       border-color: #6949ae;
+      color: #fff;
     }
   }
 
@@ -58,6 +59,8 @@
     #171717 0%,
     #000 100%
   );
+  color: #888;
+  transition: color 150ms;
 }
 
 .content {
@@ -132,6 +135,7 @@
 .metaDivider {
   width: 1px;
   height: 9px;
+  flex-shrink: 0;
   background: rgba(255, 255, 255, 0.1);
 }
 

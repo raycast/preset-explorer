@@ -3,6 +3,7 @@ import { NextRequest } from "next/server";
 import { Icons, RaycastLogoNegIcon } from "@raycast/icons";
 import { Preset } from "../../../data/presets";
 import { CSSProperties } from "react";
+import { IconComponent } from "../../../components/Icons";
 
 export const runtime = "edge";
 
@@ -18,7 +19,6 @@ export async function GET(request: Request) {
         ? `${description.slice(0, 120)}...`
         : description;
     const icon = (searchParams.get("icon") || "stars") as Preset["icon"];
-    const IconComponent = Icons[icon] ? Icons[icon] : null;
 
     const interRegular = await fetch(
       new URL(`./Inter-Regular.ttf`, import.meta.url)
@@ -81,7 +81,7 @@ export async function GET(request: Request) {
                   marginBottom: 24,
                 }}
               >
-                {IconComponent && <IconComponent width={48} height={48} />}
+                <IconComponent icon={icon} width={48} height={48} />
               </div>
             )}
             <div

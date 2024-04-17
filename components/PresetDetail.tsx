@@ -44,6 +44,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
 
   const {
     name,
+    author,
     description,
     instructions,
     creativity,
@@ -87,7 +88,25 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
             </div>
           )}
           <div className={styles.content}>
-            <h1 className={styles.title}>{name}</h1>
+            <h1 className={styles.title}>
+              {name}{" "}
+              {author ? (
+                <span className={styles.author}>
+                  by{" "}
+                  {author.link ? (
+                    <a
+                      href={author.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {author.name}
+                    </a>
+                  ) : (
+                    author.name
+                  )}
+                </span>
+              ) : null}{" "}
+            </h1>
             <h2 className={styles.description}>{description}</h2>
           </div>
         </header>

@@ -78,6 +78,8 @@
   gap: 6px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
 }
 
 .icons {
@@ -87,18 +89,30 @@
 
 .name {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 8px;
   font-size: 15px;
   font-weight: 500;
   color: #fff;
   padding-top: 6px;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+  }
 }
 
 .presetAuthor {
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
   font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   a {
     color: rgba(255, 255, 255, 0.5);
@@ -115,9 +129,14 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  overflow: hidden;
+  overflow: auto;
   text-overflow: ellipsis;
+
   min-width: 0;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .metaItem {
@@ -147,7 +166,6 @@
   line-height: 180%;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .contextMenuContent {
@@ -176,5 +194,21 @@
 
   &[data-highlighted] {
     background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.desktopOnly {
+  display: none;
+
+  @media (min-width: 640px) {
+    display: block;
+  }
+}
+
+.mobileOnly {
+  display: block;
+
+  @media (min-width: 640px) {
+    display: none;
   }
 }

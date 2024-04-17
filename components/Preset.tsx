@@ -125,18 +125,7 @@ export function PresetComponent({ preset }: { preset: Preset }) {
                   {preset.name}
                   {preset.author ? (
                     <span className={styles.presetAuthor}>
-                      by{" "}
-                      {preset.author.link ? (
-                        <a
-                          href={preset.author.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {preset.author.name}
-                        </a>
-                      ) : (
-                        preset.author.name
-                      )}
+                      by {preset.author.name}
                     </span>
                   ) : null}
                 </p>
@@ -159,7 +148,12 @@ export function PresetComponent({ preset }: { preset: Preset }) {
                     <span className={styles.metaDivider} />
                     <span className={styles.metaItem}>
                       <CreativityIcon creativity={preset.creativity} />
-                      {creativity[preset.creativity][1]}
+                      <span className={styles.mobileOnly}>
+                        {creativity[preset.creativity][0]}
+                      </span>
+                      <span className={styles.desktopOnly}>
+                        {creativity[preset.creativity][1]}
+                      </span>
                     </span>
                   </>
                 ) : null}

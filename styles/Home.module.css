@@ -214,12 +214,17 @@
 }
 
 .presets {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-bottom: 64px;
   position: relative;
   z-index: 1;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+
+  @media (min-width: 640px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
 }
 
 .placeholder {

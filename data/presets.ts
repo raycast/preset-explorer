@@ -53,6 +53,7 @@ Here are some rules:
     icon: "react",
     creativity: "low",
     model: "openai-gpt-4-turbo",
+    web_search: true,
     date: "2024-03-26",
   },
   {
@@ -75,6 +76,7 @@ Here are some rules:
     icon: "swift",
     creativity: "low",
     model: "openai-gpt-4-turbo",
+    web_search: true,
     date: "2024-03-26",
   },
   {
@@ -93,6 +95,7 @@ Here are some rules:
     icon: "python",
     creativity: "low",
     model: "openai-gpt-4-turbo",
+    web_search: true,
     date: "2024-03-26",
   },
   {
@@ -129,6 +132,7 @@ Here are some rules to follow:
     icon: "nextjs",
     creativity: "low",
     model: "openai-gpt-4-turbo",
+    web_search: true,
     date: "2024-03-26",
   },
   {
@@ -153,6 +157,7 @@ Animation curve rules:
     icon: "stars",
     creativity: "low",
     model: "openai-gpt-4-turbo",
+    web_search: true,
     date: "2024-03-26",
   },
 ];
@@ -222,8 +227,8 @@ Here are the rules you must follow:
     icon: "quote-block",
     creativity: "low",
     model: "openai-gpt-4-turbo",
-    date: "2024-03-26",
     web_search: true,
+    date: "2024-03-26",
   },
 ];
 

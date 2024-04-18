@@ -82,11 +82,9 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
       </Head>
       <div className={styles.container}>
         <header className={styles.header}>
-          {preset.icon && (
-            <div className={styles.icon}>
-              <IconComponent icon={preset.icon} />
-            </div>
-          )}
+          <div className={styles.icon}>
+            <IconComponent icon={preset.icon} />
+          </div>
           <div className={styles.content}>
             <h1 className={styles.title}>
               {name}{" "}

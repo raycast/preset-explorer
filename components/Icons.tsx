@@ -1,4 +1,4 @@
-import { Icons, IconName as RaycastIconName } from "@raycast/icons";
+import { Icons, IconName as RaycastIconName, StarsIcon } from "@raycast/icons";
 import { SVGProps } from "react";
 
 export type IconName =
@@ -27,7 +27,7 @@ export function IconComponent(
     const Icon = Icons[props.icon];
     return <Icon {...props} />;
   }
-  return null;
+  return <StarsIcon {...props} />;
 }
 
 export function ReactIcon(props: SVGProps<SVGSVGElement>) {

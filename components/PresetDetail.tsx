@@ -83,7 +83,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.icon}>
-            <IconComponent icon={preset.icon} />
+            <IconComponent icon={icon} />
           </div>
           <div className={styles.content}>
             <h1 className={styles.title}>

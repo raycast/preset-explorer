@@ -43,9 +43,13 @@ export const aiModel: AiModelType = {
   "anthropic-claude-sonnet": ["Claude", "Antrophic Claude Sonnet"],
   "perplexity-sonar-small-online": ["Sonar", "Perplexity Sonar Small"],
   "perplexity-sonar-medium-online": ["Sonar", "Perplexity Sonar Medium"],
-  "mixtral-8x7b": ["Mistral", "Mistral 8x7b"],
-  "codellama-70b-instruct": ["Code Llama 70b", "Meta Code Llama 70b"],
-  "llama2-70b": ["Llama 70b", "Meta Llama 70b"],
+  "groq-mixtral-8x7b-32768": ["Mistral", "Mistral 8x7b"],
+  "perplexity-codellama-70b-instruct": [
+    "Code Llama 70b",
+    "Meta Code Llama 70b",
+  ],
+  "groq-llama2-70b": ["Llama 2 70b", "Meta Llama 2 70b"],
+  "groq-llama3-70b": ["Llama 3 70b", "Meta Llama 3 70b"],
 };
 
 export const creativity = {

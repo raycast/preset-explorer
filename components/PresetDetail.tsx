@@ -5,7 +5,6 @@ import {
   CheckIcon,
   CopyClipboardIcon,
   Globe01Icon,
-  Icons,
   ImageIcon,
   XMarkCircleIcon,
 } from "@raycast/icons";
@@ -76,9 +75,12 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
           key="og-image"
         />
         <meta name="twitter:label1" content="Model" />
-        <meta name="twitter:data1" content={aiModel[model][1]} />
+        <meta name="twitter:data1" content={aiModel[model]?.[1]} />
         <meta name="twitter:label2" content="Creativity" />
-        <meta name="twitter:data2" content={creativityString[creativity][0]} />
+        <meta
+          name="twitter:data2"
+          content={creativityString[creativity]?.[0]}
+        />
       </Head>
       <div className={styles.container}>
         <header className={styles.header}>
@@ -130,7 +132,8 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <h3 className={styles.compactTitle}>Model</h3>
               <div className={styles.metaContent}>
                 <ModelIcon model={model} />
-                {aiModel[model][1]}
+                {model}
+                {aiModel[model]?.[1]}
                 {!proModels.includes(model) && (
                   <Tooltip>
                     <TooltipTrigger>
@@ -149,7 +152,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <h3 className={styles.compactTitle}>Creativity</h3>
               <div className={styles.metaContent}>
                 <CreativityIcon creativity={creativity} />
-                {creativityString[creativity][0]}
+                {creativityString[creativity]?.[0]}
               </div>
             </div>
             <div className={styles.metaItem}>

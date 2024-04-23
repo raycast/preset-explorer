@@ -17,15 +17,15 @@ export default function ModelIcon({ model }: { model: Preset["model"] }) {
     component = <BrandAnthropicIcon />;
   }
 
-  if (model?.includes("meta")) {
-    component = <BrandMetaIcon />;
-  }
-
   if (model?.includes("perplexity")) {
     component = <BrandPerplexityIcon />;
   }
 
-  if (model?.includes("mistral")) {
+  if (model?.includes("llama")) {
+    component = <BrandMetaIcon />;
+  }
+
+  if (model?.includes("mixtral")) {
     component = <BrandMistralIcon />;
   }
 

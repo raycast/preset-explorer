@@ -381,7 +381,7 @@ const misc: Preset[] = [
     name: "News Reader",
     instructions: `Act as an expert in news and the current state of events. Whenever prompted reply with a list of recent stories.
 
-    Here are the rules you must follow:
+Here are the rules you must follow:
 - Respond with recent news from the internet separated into 5 different lists: Top News, Politics, Business, Health and Science, Sports
 - Respond with 5 stories per category
 - Respond with each story as a bullet point in a list

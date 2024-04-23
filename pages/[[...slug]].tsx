@@ -2,7 +2,7 @@ import React from "react";
 import NextLink from "next/link";
 import { ScrollArea } from "../components/ScrollArea";
 
-import { categories, Category, Model } from "../data/presets";
+import { categories, Category } from "../data/presets";
 
 import styles from "../styles/Home.module.css";
 import { useSectionInView } from "../utils/useSectionInViewObserver";
@@ -12,6 +12,7 @@ import { PresetComponent } from "../components/Preset";
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/Tooltip";
 import Head from "next/head";
+import { advancedModels } from "../data/model";
 
 export function getStaticPaths() {
   const paths = categories.map((category) => ({
@@ -35,13 +36,6 @@ export async function getStaticProps() {
   };
 }
 
-export const proModels: Model[] = [
-  "openai-gpt-3.5-turbo",
-  "anthropic-claude-haiku",
-  "groq-mixtral-8x7b-32768",
-  "perplexity-codellama-70b-instruct",
-];
-
 export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
   const [showAdvancedModels, setShowAdvancedModels] = React.useState(true);
 
@@ -52,8 +46,8 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
       return categories
         .map((category) => ({
           ...category,
-          presets: category.presets.filter((preset) =>
-            proModels.includes(preset.model)
+          presets: category.presets.filter(
+            (preset) => !advancedModels.includes(preset.model)
           ),
         }))
         .filter((category) => category.presets.length > 0);

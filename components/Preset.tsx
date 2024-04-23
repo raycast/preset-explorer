@@ -5,7 +5,7 @@ import {
   downloadData,
   makeUrl,
 } from "../utils/actions";
-import { Model, Preset } from "../data/presets";
+import { Preset } from "../data/presets";
 import styles from "./Preset.module.css";
 import {
   CopyClipboardIcon,
@@ -25,32 +25,7 @@ import React from "react";
 import { Toast, ToastTitle } from "./Toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 import { IconComponent } from "./Icons";
-
-export type AiModelType = {
-  [key in Model]: [string, string];
-};
-
-export const aiModel: AiModelType = {
-  "openai-gpt-3.5-turbo": ["GPT-3.5", "Open AI GPT-3.5 Turbo"],
-  "openai-gpt-3.5-turbo-instruct": [
-    "GPT-3.5",
-    "Open AI GPT-3.5 Turbo Instruct",
-  ],
-  "openai-gpt-4": ["GPT-4", "Open AI GPT-4"],
-  "openai-gpt-4-turbo": ["GPT-4 Turbo", "Open AI GPT-4 Turbo"],
-  "anthropic-claude-opus": ["Claude", "Antrophic Claude Opus"],
-  "anthropic-claude-haiku": ["Claude", "Antrophic Claude Haiku"],
-  "anthropic-claude-sonnet": ["Claude", "Antrophic Claude Sonnet"],
-  "perplexity-sonar-small-online": ["Sonar", "Perplexity Sonar Small"],
-  "perplexity-sonar-medium-online": ["Sonar", "Perplexity Sonar Medium"],
-  "groq-mixtral-8x7b-32768": ["Mistral", "Mistral 8x7b"],
-  "perplexity-codellama-70b-instruct": [
-    "Code Llama 70b",
-    "Meta Code Llama 70b",
-  ],
-  "groq-llama2-70b": ["Llama 2 70b", "Meta Llama 2 70b"],
-  "groq-llama3-70b": ["Llama 3 70b", "Meta Llama 3 70b"],
-};
+import { modelNames } from "../data/model";
 
 export const creativity = {
   none: ["None", "No Creativity"],
@@ -141,10 +116,12 @@ export function PresetComponent({ preset }: { preset: Preset }) {
                     <TooltipTrigger>
                       <span className={styles.metaItem}>
                         <ModelIcon model={preset.model} />
-                        {aiModel[preset.model][0]}
+                        {modelNames[preset.model][0]}
                       </span>
                     </TooltipTrigger>
-                    <TooltipContent>{aiModel[preset.model][1]}</TooltipContent>
+                    <TooltipContent>
+                      {modelNames[preset.model][1]}
+                    </TooltipContent>
                   </Tooltip>
                 ) : null}
                 {preset.creativity ? (

@@ -1,21 +1,7 @@
 import { Icons } from "@raycast/icons";
 import { SVGProps } from "react";
 import { IconName } from "../components/Icons";
-
-export type Model =
-  | "openai-gpt-3.5-turbo-instruct"
-  | "openai-gpt-3.5-turbo"
-  | "openai-gpt-4"
-  | "openai-gpt-4-turbo"
-  | "anthropic-claude-haiku"
-  | "anthropic-claude-opus"
-  | "anthropic-claude-sonnet"
-  | "perplexity-sonar-medium-online"
-  | "perplexity-sonar-small-online"
-  | "perplexity-codellama-70b-instruct"
-  | "groq-llama2-70b"
-  | "groq-llama3-70b"
-  | "groq-mixtral-8x7b-32768";
+import { Model } from "./model";
 
 export type Preset = {
   id: string;
@@ -384,7 +370,7 @@ Here are the rules you must follow:
       "Create engaging and creative stories where you decide what happens next.",
     icon: "book",
     creativity: "maximum",
-    model: "groq-llama3-70b",
+    model: "groq-llama3-70b-8192",
     date: "2024-04-23",
   },
 ];

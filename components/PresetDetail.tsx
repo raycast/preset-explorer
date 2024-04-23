@@ -9,7 +9,7 @@ import {
   XMarkCircleIcon,
 } from "@raycast/icons";
 
-import { PresetComponent, aiModel } from "./Preset";
+import { PresetComponent } from "./Preset";
 import { creativity as creativityString } from "./Preset";
 import CreativityIcon from "./CreativityIcon";
 import ModelIcon from "./ModelIcon";
@@ -18,8 +18,8 @@ import { Preset } from "../data/presets";
 import styles from "./PresetDetail.module.css";
 import Head from "next/head";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
-import { proModels } from "../pages/[[...slug]]";
 import { IconComponent } from "./Icons";
+import { advancedModels, modelNames } from "../data/model";
 
 type PresetPageProps = {
   preset: Preset;
@@ -75,7 +75,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
           key="og-image"
         />
         <meta name="twitter:label1" content="Model" />
-        <meta name="twitter:data1" content={aiModel[model]?.[1]} />
+        <meta name="twitter:data1" content={modelNames[model]?.[1]} />
         <meta name="twitter:label2" content="Creativity" />
         <meta
           name="twitter:data2"
@@ -132,9 +132,8 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <h3 className={styles.compactTitle}>Model</h3>
               <div className={styles.metaContent}>
                 <ModelIcon model={model} />
-                {model}
-                {aiModel[model]?.[1]}
-                {!proModels.includes(model) && (
+                {modelNames[model]?.[1]}
+                {advancedModels.includes(model) && (
                   <Tooltip>
                     <TooltipTrigger>
                       <span className={styles.badge}>

@@ -1,6 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import { NextRequest } from "next/server";
-import { Icons, RaycastLogoNegIcon } from "@raycast/icons";
+import { RaycastLogoNegIcon } from "@raycast/icons";
 import { Preset } from "../../../data/presets";
 import { CSSProperties } from "react";
 import { IconComponent } from "../../../components/Icons";

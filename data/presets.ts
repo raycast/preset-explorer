@@ -384,7 +384,7 @@ Here are the rules you must follow:
       "Create engaging and creative stories where you decide what happens next.",
     icon: "book",
     creativity: "maximum",
-    model: "llama2-70b",
+    model: "groq-llama3-70b",
     date: "2024-04-23",
   },
 ];

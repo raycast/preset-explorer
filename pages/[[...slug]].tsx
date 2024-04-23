@@ -38,9 +38,8 @@ export async function getStaticProps() {
 export const proModels: Model[] = [
   "openai-gpt-3.5-turbo",
   "anthropic-claude-haiku",
-  "mixtral-8x7b",
-  "codellama-70b-instruct",
-  "llama2-70b",
+  "groq-mixtral-8x7b-32768",
+  "perplexity-codellama-70b-instruct",
 ];
 
 export default function Home({ onTouchReady }: { onTouchReady: () => void }) {

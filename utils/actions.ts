@@ -1,6 +1,7 @@
 import copy from "copy-to-clipboard";
 import { NextRouter } from "next/router";
-import { Model, Preset } from "../data/presets";
+import { Preset } from "../data/presets";
+import { Model } from "../data/model";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",

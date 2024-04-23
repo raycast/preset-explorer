@@ -149,7 +149,7 @@ Here are some rules:
 - Include links to reputable sources for further reading (when beneficial), prefer official Documentation.
 
 Animation curve rules:
-- Most often use an "ease-out" animation curve as it will make the interface feel fast and natural.
+- For most cases use an "ease-out" animation curve as it will make the interface feel fast and natural.
 - When animating things that are already visible, "ease-in-out" is a good choice as it will start and end slowly, but speed up in the middle.
 - Never use "linear" curves, expect for very specific cases like an infinite loop marquee where you need a constant speed.`,
     description:

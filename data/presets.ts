@@ -12,6 +12,7 @@ export type Preset = {
   creativity: "none" | "low" | "medium" | "high" | "maximum";
   model: Model;
   web_search?: boolean;
+  image_generation?: boolean;
   date: `${number}-${number}-${number}`;
   author?: {
     name: string;

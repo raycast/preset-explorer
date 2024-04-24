@@ -1,10 +1,12 @@
 import React from "react";
 import copy from "copy-to-clipboard";
+import clsx from "clsx";
 
 import {
   CheckIcon,
   CopyClipboardIcon,
   Globe01Icon,
+  ImageIcon,
   XMarkCircleIcon,
 } from "@raycast/icons";
 
@@ -126,7 +128,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <pre className={styles.pre}>{instructions}</pre>
             </div>
           </div>
-          <div className={styles.meta}>
+          <div className={clsx(styles.meta, image_generation && styles.grid)}>
             <div className={styles.metaItem}>
               <h3 className={styles.compactTitle}>Model</h3>
               <div className={styles.metaContent}>
@@ -157,9 +159,18 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <h3 className={styles.compactTitle}>Web Search</h3>
               <div className={styles.metaContent}>
                 {web_search ? <Globe01Icon /> : <XMarkCircleIcon />}
-                {web_search ? "Enabled" : "Disabled"}
+                {web_search ? "On" : "Off"}
               </div>
             </div>
+            {image_generation && (
+              <div className={styles.metaItem}>
+                <h3 className={styles.compactTitle}>Image Generation</h3>
+                <div className={styles.metaContent}>
+                  {image_generation ? <ImageIcon /> : <XMarkCircleIcon />}
+                  {image_generation ? "On" : "Off"}
+                </div>
+              </div>
+            )}
           </div>
         </div>
         {relatedPresets && (

@@ -5,7 +5,6 @@ import {
   CheckIcon,
   CopyClipboardIcon,
   Globe01Icon,
-  ImageIcon,
   XMarkCircleIcon,
 } from "@raycast/icons";
 
@@ -159,13 +158,6 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <div className={styles.metaContent}>
                 {web_search ? <Globe01Icon /> : <XMarkCircleIcon />}
                 {web_search ? "Enabled" : "Disabled"}
-              </div>
-            </div>
-            <div className={styles.metaItem}>
-              <h3 className={styles.compactTitle}>Image Generation</h3>
-              <div className={styles.metaContent}>
-                {image_generation ? <ImageIcon /> : <XMarkCircleIcon />}
-                {image_generation ? "Enabled" : "Disabled"}
               </div>
             </div>
           </div>

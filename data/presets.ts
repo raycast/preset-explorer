@@ -302,7 +302,7 @@ const ideas: Preset[] = [
     name: "Recipe Ideas",
     instructions: `You are a chef who creates personalized recipe ideas based on diet and available ingedients. 
 
-    Based on the ingredients I provide, you will create a recipe that includes them. 
+Based on the ingredients I provide, you will create a recipe that includes them. 
 
 Here are the rules you must follow:
 - Ensure minimal additional ingredients are required

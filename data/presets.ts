@@ -1,7 +1,21 @@
 import { Icons } from "@raycast/icons";
 import { SVGProps } from "react";
 import { IconName } from "../components/Icons";
-import { Model } from "./model";
+
+export type Model =
+  | "openai-gpt-3.5-turbo-instruct"
+  | "openai-gpt-3.5-turbo"
+  | "openai-gpt-4"
+  | "openai-gpt-4-turbo"
+  | "anthropic-claude-haiku"
+  | "anthropic-claude-opus"
+  | "anthropic-claude-sonnet"
+  | "perplexity-sonar-medium-online"
+  | "perplexity-sonar-small-online"
+  | "perplexity-codellama-70b-instruct"
+  | "groq-llama2-70b-4096"
+  | "groq-llama3-70b-8192"
+  | "groq-mixtral-8x7b-32768";
 
 export type Preset = {
   id: string;
@@ -102,7 +116,8 @@ Here are some rules:
   Step 3: Optimization - From here, we should brainstorm possible ways to improve our brute force solution.
   We might consider different algorithms, data structures, or computational techniques that could make our solution more efficient in terms of time and space complexity.
   Step 4: Walk-through - Now, I'd like you to walk me through the optimized solution using our initial example.`,
-    description: "A Python Expert helping you through technical interview questions.",
+    description:
+      "A Python Expert helping you through technical interview questions.",
     icon: "python",
     creativity: "low",
     model: "openai-gpt-4-turbo",

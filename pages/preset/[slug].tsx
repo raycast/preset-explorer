@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { Preset, allPresets } from "../../data/presets";
 import { PresetDetail } from "../../components/PresetDetail";
+import { AiModel, getAvailableAiModels } from "../../lib/api";
 
 export const getStaticPaths: GetStaticPaths = () => {
   const paths = allPresets.map((preset) => ({
@@ -16,6 +17,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps<{
   preset: Preset;
   relatedPresets: Preset[];
+  models: AiModel[];
 }> = async (context) => {
   const { params } = context;
   if (!params) {
@@ -33,10 +35,13 @@ export const getStaticProps: GetStaticProps<{
     .sort(() => 0.5 - Math.random())
     .slice(0, 2);
 
+  const models = await getAvailableAiModels();
+
   return {
     props: {
       preset,
       relatedPresets,
+      models,
     },
   };
 };
@@ -46,6 +51,13 @@ type PresetPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 export default function PresetPage({
   preset,
   relatedPresets,
+  models,
 }: PresetPageProps) {
-  return <PresetDetail preset={preset} relatedPresets={relatedPresets} />;
+  return (
+    <PresetDetail
+      preset={preset}
+      relatedPresets={relatedPresets}
+      models={models}
+    />
+  );
 }

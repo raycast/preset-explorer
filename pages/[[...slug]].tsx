@@ -12,7 +12,8 @@ import { PresetComponent } from "../components/Preset";
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/Tooltip";
 import Head from "next/head";
-import { advancedModels } from "../data/model";
+import { getAvailableAiModels } from "../lib/api";
+import { InferGetStaticPropsType } from "next";
 
 export function getStaticPaths() {
   const paths = categories.map((category) => ({
@@ -31,13 +32,25 @@ export function getStaticPaths() {
 }
 
 export async function getStaticProps() {
+  const models = await getAvailableAiModels();
+
   return {
-    props: {},
+    props: {
+      models,
+    },
   };
 }
 
-export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
+type Props = InferGetStaticPropsType<typeof getStaticProps> & {
+  onTouchReady: () => void;
+};
+
+export default function Home({ onTouchReady, models }: Props) {
   const [showAdvancedModels, setShowAdvancedModels] = React.useState(true);
+
+  const advancedModels = models
+    .filter((model) => model.requires_better_ai)
+    .map((model) => model.model);
 
   const filteredCategories = React.useMemo(() => {
     if (showAdvancedModels) {
@@ -52,7 +65,7 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
         }))
         .filter((category) => category.presets.length > 0);
     }
-  }, [showAdvancedModels]);
+  }, [showAdvancedModels, advancedModels]);
 
   React.useEffect(() => {
     onTouchReady();
@@ -141,7 +154,11 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
                 </h2>
                 <div className={styles.presets}>
                   {category.presets.map((preset) => (
-                    <PresetComponent key={preset.id} preset={preset} />
+                    <PresetComponent
+                      key={preset.id}
+                      preset={preset}
+                      models={models}
+                    />
                   ))}
                 </div>
               </div>

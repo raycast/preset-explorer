@@ -25,7 +25,7 @@ import React from "react";
 import { Toast, ToastTitle } from "./Toast";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 import { IconComponent } from "./Icons";
-import { modelNames } from "../data/model";
+import { AiModel } from "../lib/api";
 
 export const creativity = {
   none: ["None", "No Creativity"],
@@ -35,10 +35,17 @@ export const creativity = {
   maximum: ["Maximum", "Max Creativity"],
 };
 
-export function PresetComponent({ preset }: { preset: Preset }) {
+export function PresetComponent({
+  preset,
+  models,
+}: {
+  preset: Preset;
+  models: AiModel[];
+}) {
   const [showToast, setShowToast] = React.useState(false);
   const [toastMessage, setToastMessage] = React.useState("");
   const router = useRouter();
+  const model = models?.find((m) => m.id === preset.model);
 
   const handleCopyInstruction = React.useCallback(
     () => copy(preset.instructions),
@@ -111,16 +118,16 @@ export function PresetComponent({ preset }: { preset: Preset }) {
                 <p className={styles.presetDescription}>{preset.description}</p>
               </div>
               <div className={styles.meta}>
-                {preset.model ? (
+                {model && preset.model ? (
                   <Tooltip delayDuration={700}>
                     <TooltipTrigger>
                       <span className={styles.metaItem}>
                         <ModelIcon model={preset.model} />
-                        {modelNames[preset.model][0]}
+                        {model.name}
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      {modelNames[preset.model][1]}
+                      {model.provider_name} {model.name}
                     </TooltipContent>
                   </Tooltip>
                 ) : null}

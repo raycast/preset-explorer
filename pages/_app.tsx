@@ -44,7 +44,6 @@ import {
 } from "../components/Dialog";
 import { useRouter } from "next/router";
 import { Preset } from "../data/presets";
-import { parseURLPreset } from "./shared";
 import {
   addToRaycast,
   copyData,

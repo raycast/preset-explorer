@@ -1,7 +1,7 @@
 import { Model } from "../data/presets";
 
 export type AiModel = {
-  id: string;
+  id: Model;
   name: string;
   description: string;
   availability: "public" | "beta" | "internal" | "deprecated";
@@ -9,7 +9,7 @@ export type AiModel = {
   suggestions: string[];
   capabilities: Record<string, string>;
   in_better_ai_subscription: boolean;
-  model: Model;
+  model: string;
   provider: string;
   provider_name: string;
   provider_brand: string;

@@ -59,13 +59,14 @@ export default function Home({ onTouchReady, models }: Props) {
       return categories
         .map((category) => ({
           ...category,
-          presets: category.presets.filter(
-            (preset) => !advancedModels.includes(preset.model)
-          ),
+          presets: category.presets.filter((preset) => {
+            const presetObj = models.find((model) => model.id === preset.model);
+            return !advancedModels.includes(presetObj?.model || "");
+          }),
         }))
         .filter((category) => category.presets.length > 0);
     }
-  }, [showAdvancedModels, advancedModels]);
+  }, [showAdvancedModels, advancedModels, models]);
 
   React.useEffect(() => {
     onTouchReady();

@@ -20,15 +20,21 @@ import styles from "./PresetDetail.module.css";
 import Head from "next/head";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./Tooltip";
 import { IconComponent } from "./Icons";
-import { advancedModels, modelNames } from "../data/model";
+import { AiModel } from "../lib/api";
 
 type PresetPageProps = {
   preset: Preset;
   relatedPresets: Preset[];
+  models: AiModel[];
 };
 
-export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
+export function PresetDetail({
+  preset,
+  relatedPresets,
+  models,
+}: PresetPageProps) {
   const [showCopied, setShowCopied] = React.useState(false);
+  const modelObj = models?.find((m) => m.id === preset.model);
 
   React.useEffect(() => {
     if (showCopied) {
@@ -76,7 +82,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
           key="og-image"
         />
         <meta name="twitter:label1" content="Model" />
-        <meta name="twitter:data1" content={modelNames[model]?.[1]} />
+        <meta name="twitter:data1" content={modelObj?.name} />
         <meta name="twitter:label2" content="Creativity" />
         <meta
           name="twitter:data2"
@@ -133,8 +139,8 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <h3 className={styles.compactTitle}>Model</h3>
               <div className={styles.metaContent}>
                 <ModelIcon model={model} />
-                {modelNames[model]?.[1]}
-                {advancedModels.includes(model) && (
+                {modelObj?.provider_name} {modelObj?.name}
+                {modelObj?.in_better_ai_subscription && (
                   <Tooltip>
                     <TooltipTrigger>
                       <span className={styles.badge}>
@@ -180,7 +186,7 @@ export function PresetDetail({ preset, relatedPresets }: PresetPageProps) {
               <p className={styles.subtitle}>Explore more presets</p>
               <div className={styles.grid}>
                 {relatedPresets.map((p) => (
-                  <PresetComponent key={p.id} preset={p} />
+                  <PresetComponent key={p.id} preset={p} models={models} />
                 ))}
               </div>
             </div>

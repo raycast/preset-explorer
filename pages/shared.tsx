@@ -3,6 +3,7 @@ import React from "react";
 
 import { allPresets, Preset } from "../data/presets";
 import { PresetDetail } from "../components/PresetDetail";
+import { AiModel, getAvailableAiModels } from "../lib/api";
 
 export function parseURLPreset(presetQueryString?: string) {
   if (!presetQueryString) {
@@ -14,6 +15,7 @@ export function parseURLPreset(presetQueryString?: string) {
 export const getServerSideProps: GetServerSideProps<{
   preset: Preset;
   relatedPresets: Preset[];
+  models: AiModel[];
 }> = async (context) => {
   const { query } = context;
   const preset = parseURLPreset(query.preset as string);
@@ -27,10 +29,13 @@ export const getServerSideProps: GetServerSideProps<{
     .sort(() => 0.5 - Math.random())
     .slice(0, 2);
 
+  const models = await getAvailableAiModels();
+
   return {
     props: {
       preset,
       relatedPresets: relatedPresets,
+      models,
     },
   };
 };
@@ -38,6 +43,13 @@ export const getServerSideProps: GetServerSideProps<{
 export default function PresetPage({
   preset,
   relatedPresets,
+  models,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return <PresetDetail preset={preset} relatedPresets={relatedPresets} />;
+  return (
+    <PresetDetail
+      preset={preset}
+      relatedPresets={relatedPresets}
+      models={models}
+    />
+  );
 }

@@ -35,6 +35,7 @@ export function PresetDetail({
 }: PresetPageProps) {
   const [showCopied, setShowCopied] = React.useState(false);
   const modelObj = models?.find((m) => m.id === preset.model);
+  const modelSupportsImageGen = modelObj?.capabilities?.image_generation;
 
   React.useEffect(() => {
     if (showCopied) {
@@ -134,7 +135,9 @@ export function PresetDetail({
               <pre className={styles.pre}>{instructions}</pre>
             </div>
           </div>
-          <div className={clsx(styles.meta, image_generation && styles.grid)}>
+          <div
+            className={clsx(styles.meta, modelSupportsImageGen && styles.grid)}
+          >
             <div className={styles.metaItem}>
               <h3 className={styles.compactTitle}>Model</h3>
               <div className={styles.metaContent}>
@@ -168,7 +171,7 @@ export function PresetDetail({
                 {web_search ? "On" : "Off"}
               </div>
             </div>
-            {image_generation && (
+            {modelSupportsImageGen && (
               <div className={styles.metaItem}>
                 <h3 className={styles.compactTitle}>Image Generation</h3>
                 <div className={styles.metaContent}>

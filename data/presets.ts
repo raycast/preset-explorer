@@ -7,6 +7,7 @@ export type Model =
   | "openai-gpt-3.5-turbo"
   | "openai-gpt-4"
   | "openai-gpt-4-turbo"
+  | "openai-gpt-4o"
   | "anthropic-claude-haiku"
   | "anthropic-claude-opus"
   | "anthropic-claude-sonnet"
@@ -358,6 +359,24 @@ Here are the rules you must follow:
     creativity: "medium",
     model: "anthropic-claude-opus",
     date: "2024-04-23",
+  },
+  {
+    id: "logo-designer",
+    name: "Logo Ideas",
+    instructions: `You are a graphic designer that specializes in logo design.
+
+Here are the rules you must follow:
+- Always reply with an image generation of a logotype.
+- The logo is minimalist and without text
+- Max 1-2 simple shapes, don't use a lot of elements
+- Only reply with 1 (one) image
+- Don't include other elements inside the image like backgrounds, props, or extras - only the logo shape`,
+    description: "Generates logo ideas for your business or hobby.",
+    icon: "image",
+    creativity: "maximum",
+    model: "openai-gpt-4o",
+    image_generation: true,
+    date: "2024-05-15",
   },
 ];
 

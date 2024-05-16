@@ -7,7 +7,14 @@ export type AiModel = {
   availability: "public" | "beta" | "internal" | "deprecated";
   features: string[];
   suggestions: string[];
-  capabilities: Record<string, string>;
+  abilities: {
+    image_generation: {
+      model: string;
+    };
+    web_search: {
+      toggleable: boolean;
+    };
+  };
   in_better_ai_subscription: boolean;
   model: string;
   provider: string;

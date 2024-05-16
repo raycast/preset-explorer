@@ -35,7 +35,7 @@ export function PresetDetail({
 }: PresetPageProps) {
   const [showCopied, setShowCopied] = React.useState(false);
   const modelObj = models?.find((m) => m.id === preset.model);
-  const modelSupportsImageGen = modelObj?.capabilities?.image_generation;
+  const modelSupportsImageGen = modelObj?.abilities?.image_generation;
 
   React.useEffect(() => {
     if (showCopied) {

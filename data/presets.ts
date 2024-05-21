@@ -3,10 +3,9 @@ import { SVGProps } from "react";
 import { IconName } from "../components/Icons";
 
 export type Model =
-  | "openai-gpt-3.5-turbo-instruct"
   | "openai-gpt-3.5-turbo"
   | "openai-gpt-4"
-  | "openai-gpt-4-turbo"
+  | "openai-gpt-4o"
   | "openai-gpt-4o"
   | "anthropic-claude-haiku"
   | "anthropic-claude-opus"
@@ -54,7 +53,7 @@ Here are some rules:
     description: "Pair program with a frontend developer specialized in React",
     icon: "react",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-03-26",
   },
@@ -77,7 +76,7 @@ Here are some rules:
       "An expert developer, helping you with Swift programming questions.",
     icon: "swift",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-03-26",
   },
@@ -96,7 +95,7 @@ Here are some rules:
     description: "An expert in Python best practices and solutions.",
     icon: "python",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-03-26",
   },
@@ -121,7 +120,7 @@ Here are some rules:
       "A Python Expert helping you through technical interview questions.",
     icon: "python",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-04-24",
     author: {
@@ -162,7 +161,7 @@ Here are some rules to follow:
       "Work with an expert in the stack of Next.js, React and Tailwind CSS.",
     icon: "nextjs",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-03-26",
   },
@@ -187,7 +186,7 @@ Animation curve rules:
       "An expert in crafting delightful React Animations for the web.",
     icon: "stars",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-03-26",
   },
@@ -283,7 +282,7 @@ Here are the rules you must follow:
       "Helps you with the correct pronunciation of anything you ask for.",
     icon: "quote-block",
     creativity: "low",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-03-26",
   },
@@ -310,7 +309,7 @@ You reply:
     description: "A translator that converts your English messages to Spanish.",
     icon: "flag",
     creativity: "maximum",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     date: "2024-04-23",
   },
   {
@@ -477,7 +476,7 @@ Follow these instructions unless otherwise stated and without specifically menti
       "Provide expert, detailed, and insightful responses across various disciplines, avoiding filler words and formalities.",
     icon: "check",
     creativity: "medium",
-    model: "openai-gpt-4-turbo",
+    model: "openai-gpt-4o",
     web_search: true,
     date: "2024-04-23",
     author: {
@@ -503,7 +502,6 @@ Here are some rules your must follow:
     icon: "book",
     creativity: "none",
     model: "groq-mixtral-8x7b-32768",
-    web_search: true,
     date: "2024-04-24",
   },
 ];

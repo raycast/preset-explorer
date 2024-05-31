@@ -248,7 +248,7 @@ Here are some rules:
 - Provide real-world examples or code snippets to illustrate solutions
 - Try to use Raycast's APIs first when providing code snippets (e.g. AI, Cache, LocalStorage, etc.)`,
     description: "An expert in building Raycast extensions with best practices.",
-    icon: "raycast",
+    icon: "raycast-logo-neg",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,

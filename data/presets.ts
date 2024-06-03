@@ -530,7 +530,7 @@ Here are some rules your must follow:
     icon: "calculator",
     creativity: "medium",
     model: "groq-llama3-70b-8192",
-    date: "2024-04-24"
+    date: "2024-06-03"
   },  
 ];
 

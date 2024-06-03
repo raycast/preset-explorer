@@ -523,6 +523,16 @@ Here are some rules your must follow:
     model: "groq-mixtral-8x7b-32768",
     date: "2024-04-24",
   },
+  {
+    id: "math-tutor",
+    name: "Math Tutor",
+    instructions: `For the following user-provided problem, act as a teacher trying to help their student understand how to solve the problem. Do not ever reveal the answer and do not ever reveal too many steps. Get the student to do as much of the work as possible.`,
+    description: "Helps students understand the steps behind solving their math problems without revealing the answer, similar to KhanMigo.",
+    icon: "calculator",
+    creativity: "medium",
+    model: "groq-llama3-70b-8192",
+    date: "2024-06-03"
+  },  
 ];
 
 type IconComponent = (props: SVGProps<SVGSVGElement>) => JSX.Element;

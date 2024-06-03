@@ -51,7 +51,7 @@ Here are some rules:
 - Highlight any considerations, such as browser compatibility or potential performance impacts, with advised solutions.
 - Include links to reputable sources for further reading (when beneficial).`,
     description: "Pair program with a frontend developer specialized in React",
-    icon: "react",
+    icon: "brand-react",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,
@@ -74,7 +74,7 @@ Here are some rules:
 - Include links to reputable sources for further reading (when beneficial).`,
     description:
       "An expert developer, helping you with Swift programming questions.",
-    icon: "swift",
+    icon: "brand-swift",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,
@@ -93,7 +93,7 @@ Here are some rules:
 - Highlight any considerations, such as potential performance impacts, with advised solutions.
 - Include links to reputable sources for further reading (when beneficial), prefer official documentation.`,
     description: "An expert in Python best practices and solutions.",
-    icon: "python",
+    icon: "brand-python",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,
@@ -118,7 +118,7 @@ Here are some rules:
   Step 4: Walk-through - Now, I'd like you to walk me through the optimized solution using our initial example.`,
     description:
       "A Python Expert helping you through technical interview questions.",
-    icon: "python",
+    icon: "brand-python",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,
@@ -159,7 +159,7 @@ Here are some rules to follow:
 - Include links to reputable sources for further reading (when beneficial), prefer official documentation.`,
     description:
       "Work with an expert in the stack of Next.js, React and Tailwind CSS.",
-    icon: "nextjs",
+    icon: "brand-nextjs",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,
@@ -247,13 +247,14 @@ Here are some rules:
 - Use @raycast/utils hooks whenever possible (e.g useFetch, useCachedPromise, usePromise, etc.)
 - Provide real-world examples or code snippets to illustrate solutions
 - Try to use Raycast's APIs first when providing code snippets (e.g. AI, Cache, LocalStorage, etc.)`,
-    description: "An expert in building Raycast extensions with best practices.",
+    description:
+      "An expert in building Raycast extensions with best practices.",
     icon: "raycast-logo-neg",
     creativity: "low",
     model: "openai-gpt-4o",
     web_search: true,
     date: "2024-05-31",
-  }
+  },
 ];
 
 const communication: Preset[] = [];

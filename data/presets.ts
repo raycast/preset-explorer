@@ -531,7 +531,11 @@ Here are some rules your must follow:
     icon: "calculator",
     creativity: "medium",
     model: "groq-llama3-70b-8192",
-    date: "2024-06-03"
+    date: "2024-06-03",
+    author: {
+      name: "Vaibhav Satishkumar",
+      link: "https://www.raycast.com/Visual-Studio-Coder",
+    },
   },  
 ];
 

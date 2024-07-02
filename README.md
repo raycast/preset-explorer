@@ -1,14 +1,12 @@
+> [!NOTE]  
+> Moved to https://github.com/raycast/ray-so
+
 <!-- TEXT_SECTION:header:START -->
-<p align="center">
-  <a href="https://presets.ray.so" target="_blank" rel="noopener noreferrer">
-    <img width="1024" src="https://presets.ray.so/og-image.png" alt="Preset Explorer">
-  </a>
-</p>
 <h1 align="center">
   Presets Explorer
 </h1>
 <h3 align="center">
-  presets.ray.so
+  ray.so/presets
 </h3>
 <p align="center">
   Easily browse, share, and add presets to Raycast
